@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace TravelAgency.model
 {
-    public class User
+    public enum AccomondationType
     {
-
+        HOTEL, AIRBnB, HOSTEL, APARTMAN
     }
-
 }
