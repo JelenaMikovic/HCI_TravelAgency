@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravelAgency.model
 {
-    internal class Location
+    public class Location
     {
         public string Country { get; set; }
         public string City { get; set; }
