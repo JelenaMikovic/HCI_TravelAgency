@@ -50,13 +50,12 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid Background="#EAEAEA">
         <Grid.RowDefinitions>
             <RowDefinition Height="43*"/>
             <RowDefinition Height="55*"/>
             <RowDefinition Height="316*"/>
         </Grid.RowDefinitions>
-        <Rectangle HorizontalAlignment="Left" Height="414" Fill="#EAEAEA" VerticalAlignment="Top" Width="498" Grid.RowSpan="3" Margin="252,0,0,0"/>
 
         <Rectangle HorizontalAlignment="Left" Height="414" Fill="#0C0C0C" VerticalAlignment="Top" Width="252" Grid.RowSpan="3"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="73,5,0,0" VerticalAlignment="Top" Width="100" Source="/travel.png" Opacity="0.85" Grid.Row="1" Grid.RowSpan="2"/>
@@ -80,6 +79,6 @@
                 <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
             </PasswordBox.Effect>
         </PasswordBox>
-        <Label Content="Nemate nalog? Registrujte se!" HorizontalAlignment="Left" Margin="433,248,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14"/>
+        <Label Content="Nemate nalog? Registrujte se!" HorizontalAlignment="Left" Margin="398,248,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14"/>
     </Grid>
 </Window>
