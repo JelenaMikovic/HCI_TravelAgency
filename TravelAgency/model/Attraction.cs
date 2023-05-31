@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravelAgency.model
 {
-    internal class Attraction
+    public class Attraction
     {
         public int Id { get; set; }
         public string Name { get; set; }
