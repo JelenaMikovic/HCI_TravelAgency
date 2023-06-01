@@ -32,11 +32,13 @@
                                     <DropShadowEffect Opacity="0.25" BlurRadius="15"/>
                                 </Rectangle.Effect>
                             </Rectangle>
-                            <Border Width="196" Height="196" Margin="28,5,0,0" BorderThickness="1" BorderBrush="Black">
+                            <Border Width="196" Height="196" Margin="28,5,0,0" BorderThickness="0" BorderBrush="#00000000">
                                 <Border.CornerRadius>
                                     <CornerRadius TopLeft="5" TopRight="0" BottomRight="0" BottomLeft="5"/>
                                 </Border.CornerRadius>
-                                <Image Source="{Binding Image}" Stretch="UniformToFill"/>
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill"/>
+                                </Border.Background>
                             </Border>
                             <StackPanel Grid.Column="1" Margin="28,5,0,0">
                                 <Label Content="{Binding Location}" FontSize="22" FontWeight="Medium" Foreground="#FF0C0C0C"/>

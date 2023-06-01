@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelAgency.converters;
 using TravelAgency.db;
 using TravelAgency.model;
 
@@ -36,12 +37,16 @@ namespace TravelAgency.views
 
         private ObservableCollection<Trip>? GetTrips()
         {
+            var converter = new Base64StringToImageSourceConverter();
             Trips = new ObservableCollection<Trip>();
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
                 foreach (Tour tour in dbContext.Tours)
                 {
-                    Trips.Add(new Trip { Location = tour.Name, DateRange = tour.From.ToString("d") + " - " + tour.To.ToString("d") + " (" + (int)(tour.To - tour.From).TotalDays + " dana)", Price = tour.Price, Id = tour.Id});
+                    Trips.Add(new Trip { Location = tour.Name, DateRange = tour.From.ToString("d") + " - " + tour.To.ToString("d") + " (" + (int)(tour.To - tour.From).TotalDays + " dana)", Price = tour.Price,
+                        Id = tour.Id,
+                        Image = (BitmapImage)converter.Convert(tour.Picture, null, null, null)
+                    });
                 }
             }
             else
@@ -76,6 +81,6 @@ namespace TravelAgency.views
         public string Location { get; set; }
         public string DateRange { get; set; }
         public int Price { get; set; }
-        public Image Image { get; set; }
+        public BitmapImage Image { get; set; }
     }
 }
