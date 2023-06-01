@@ -63,7 +63,7 @@
         <TextBlock Margin="27,55,512,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="/Fonts/#Poppins" Foreground="#FFEAEAEA" FontSize="22" TextAlignment="Right" Grid.Row="2" ><Run Text="&quot;Neka avantura"/><LineBreak/><Run Text="započne - prijavite"/><LineBreak/><Run Text="se i istražite"/><LineBreak/><Run Text="svet s nama!&quot;"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="30,273,0,0" Grid.Row="2" FontFamily="/Fonts/#Poppins" FontWeight="Light" Foreground="#FFEAEAEA" FontSize="22" TextWrapping="Wrap" Text="Rapsody Travel ©" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="441,10,0,0" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="22" TextWrapping="Wrap" Text="Registracija" VerticalAlignment="Top"/>
-        <Button Style="{StaticResource RoundButtonStyle}" Content="Prijavite se" HorizontalAlignment="Left" Height="40" Margin="424,237,0,0" Grid.Row="2" VerticalAlignment="Top" Width="163" Click="LogIn" FontFamily="/Fonts/#Poppins" FontSize="14" Foreground="#FFEAEAEA" RenderTransformOrigin="1,0" Background="#FF0C0C0C" BorderThickness="0,0,1,1" BorderBrush="{x:Null}" >
+        <Button Style="{StaticResource RoundButtonStyle}" Content="Registrujte se" HorizontalAlignment="Left" Height="40" Margin="424,237,0,0" Grid.Row="2" VerticalAlignment="Top" Width="163" Click="Register" FontFamily="/Fonts/#Poppins" FontSize="14" Foreground="#FFEAEAEA" RenderTransformOrigin="1,0" Background="#FF0C0C0C" BorderThickness="0,0,1,1" BorderBrush="{x:Null}" >
             <Button.Effect>
                 <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
             </Button.Effect>
