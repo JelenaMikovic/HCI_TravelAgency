@@ -13,7 +13,7 @@ namespace TravelAgency.model
         public Location Location { get; set; }
         public string Picture { get; set; }
         public AccomondationType Type { get; set; }
-        public Tour Tour { get; set; }
+        public int TourID { get; set; }
         public bool isDeleted { get; set; }
     }
 }

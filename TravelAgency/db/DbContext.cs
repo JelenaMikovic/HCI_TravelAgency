@@ -165,7 +165,7 @@ namespace TravelAgency.db
                 {
                     Id = 1,
                     Name = "Poseta zološkom vrtu",
-                    Tour = Tours.Find(1),
+                    TourID = 1,
                     isDeleted = false,
                     Description = "Zoo-park Jagodina je jedan od četiri zoološka vrta u Srbiji. Zvanično je počeo sa radom 10. jula 2006. godine. Prostire se na površini od 2,5 ha, na terenu na kome je prethodno bila ledina. U Vrtu se čuva oko 250 vrsta životinja, sa preko 320 jedinki.[1] Posetiocima su na raspolaganju vodiči, koji ih vode ih u obilazak kompleksa, pružajući objašnjenja o životinjama.[2] Zoo-vrt radi 365 dana u godini, bez ozbzira na verske ili državne praznike u Srbiji.[3]\r\n\r\nZoološki vrt u Jagodini je prvi zoološki vrt izgrađen u Srbiji južno od Beograda. Njegovim otvaranjem Jagodina je postala jedan od značajnih turističkih centara u Srbiji.[4] Svečano ga je otvorio nekadašnji direktor Beo zoo vrta Vuk Bojović, koji je i počasni građanin Jagodine.",
                     Location = Locations.Find(2),
@@ -177,7 +177,7 @@ namespace TravelAgency.db
                 {
                     Id = 2,
                     Name = "Muzej voštanih figura",
-                    Tour = Tours.Find(1),
+                    TourID = 1,
                     isDeleted = false,
                     Description = "Muzej voštanih figura u Jagodini je otvoren 29. aprila 2008. godine. Nalazi se u Jagodini i trenutno zapošljava 8 stručnih radnika i saradnika.\r\n\r\nMuzej je jedan od šest muzeja na evropskom kontinentu, a prvi u Srbiji sa likovima iz srpske istorije od Svetog Save do Vojislava Koštunice i Vlade Divca.\r\n\r\nMuzej voštanih figura prostire se na 450 m2 i ima 29 figura u stalnoj postavci.",
                     Location = Locations.Find(3),
@@ -189,7 +189,7 @@ namespace TravelAgency.db
                 {
                     Id = 3,
                     Name = "Poseta akva parku",
-                    Tour = Tours.Find(1),
+                    TourID = 1,
                     isDeleted = false,
                     Description = "Akva park u Jagodini je prvi akva park u Srbiji, a otvoren je 2007. godine. Na 50 hiljada kvadratnih metara, na koliko se prostire, nalazi se 7 bazena i 9 tobogana. Akva park u Jagodini predstavlja savršen beg iz grada tokom vrelih letnjih meseci i idealno mesto za celodnevno uživanje.",
                     Location = Locations.Find(4),
@@ -201,7 +201,7 @@ namespace TravelAgency.db
                 {
                     Id = 1,
                     Name = "Wing Club Restaurant",
-                    Tour = Tours.Find(1),
+                    TourID = 1,
                     isDeleted = false,
                     Description = "Izvrsna ekipa kuvara Wing Club restorana ponudiće Vam topao, ukusan, svež i mirisan obrok sastavljen od kvalitetnih sastojaka.",
                     Location = Locations.Find(5),
@@ -213,7 +213,7 @@ namespace TravelAgency.db
                 {
                     Id = 2,
                     Name = "Restaurant Potok",
-                    Tour = Tours.Find(1),
+                    TourID = 1,
                     isDeleted = false,
                     Description = "Smešten je u prekrasnom ambijentu šetališta potok ''Đurđevo brdo''.Prirodna i mirna atmosfera omogućiće Vam potpun odmor, kao i užitak uz odličnu kuhinju i kvalitetnu uslugu.",
                     Location = Locations.Find(6),
@@ -225,7 +225,7 @@ namespace TravelAgency.db
                 {
                     Id = 1,
                     Name = "Hill Hotel Jagodina",
-                    Tour = Tours.Find(1),
+                    TourID = 1,
                     Type = AccomondationType.HOTEL,
                     isDeleted = false,
                     Location = Locations.Find(7),

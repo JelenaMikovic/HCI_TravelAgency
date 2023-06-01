@@ -5,9 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TravelAgency.views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Label Content="{Binding Namek}" HorizontalAlignment="Left" Margin="214,164,0,0" VerticalAlignment="Top"/>
-
+             d:DesignHeight="450" d:DesignWidth="800" Foreground="#FFEAEAEA" >
+    <Grid >
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Foreground="#FFEAEAEA">
+            <Image HorizontalAlignment="Left" Height="100" Margin="260,54,0,0" VerticalAlignment="Top" Width="100"/>
+        </ScrollViewer>
     </Grid>
 </UserControl>
