@@ -38,7 +38,7 @@ namespace TravelAgency
                     content = new FutureTrips();
                     break;
                 case "Purchased":
-                    content = new FutureTrips();
+                    content = new TourDetails(1);
                     break;
                 case "Reserved":
                     content = new FutureTrips();
@@ -55,5 +55,6 @@ namespace TravelAgency
         {
 
         }
+
     }
 }

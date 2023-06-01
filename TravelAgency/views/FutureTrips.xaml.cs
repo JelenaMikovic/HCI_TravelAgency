@@ -56,22 +56,20 @@ namespace TravelAgency.views
             return Trips;
         }
 
+        private int SelectedTripId { get; set; }
+
         private void TripListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Retrieve the selected ListBoxItem
-            var listBox = (ListBox)sender;
-            var selectedListBoxItem = (ListBoxItem)listBox.SelectedItem;
-
-            // Retrieve the trip Id from the ListBoxItem's Tag property
-            var selectedTripId = (int)selectedListBoxItem.Tag;
-
-            // Open a new window or page and pass the selected trip Id as a parameter
-            // For example:
-            // var tripDetailsWindow = new TripDetailsWindow(selectedTripId);
-            // tripDetailsWindow.Show();
-            var tripDetails = new TourDetails();
-            tripDetails.DataContext = selectedTripId;
+            if (tripListBox.SelectedItem != null)
+            {
+                var selectedTripId = ((Trip)tripListBox.SelectedItem).Id;
+                SelectedTripId = selectedTripId;
+                TourDetails tourDetails = new TourDetails(selectedTripId);
+                ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                clientMainWindow.contentControl.Content = tourDetails;
+            }
         }
+
 
     }
 

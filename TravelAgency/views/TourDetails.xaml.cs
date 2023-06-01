@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelAgency.db;
+using TravelAgency.model;
 
 namespace TravelAgency.views
 {
@@ -20,9 +24,15 @@ namespace TravelAgency.views
     /// </summary>
     public partial class TourDetails : UserControl
     {
-        public TourDetails()
+        private int selectedTripId;
+        public string Namek { get; set; }
+
+        public TourDetails(int selectedTripId)
         {
+            this.selectedTripId = selectedTripId;
             InitializeComponent();
+            DataContext = this;
+            Namek = "KURCINAA";
         }
     }
 }
