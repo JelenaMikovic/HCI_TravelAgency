@@ -8,7 +8,23 @@
              d:DesignHeight="405" d:DesignWidth="750" Foreground="#FFEAEAEA" >
     <Grid >
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Foreground="#FFEAEAEA">
-            <Image Height="82" Width="750"/>
+            <StackPanel>
+                <Grid Height="136" Width="750" >
+                    <Image Source="{Binding detailedTrip.Image}" Stretch="UniformToFill"
+           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="{Binding detailedTrip.Price}" Margin="0,0,0,10" Grid.Column="1"/>
+                    <Label Content="Second String" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Column="1"/>
+                    <Label Content="Third String" HorizontalAlignment="Right" Margin="0,0,0,10" Grid.Column="1"/>
+                </Grid>
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </UserControl>
