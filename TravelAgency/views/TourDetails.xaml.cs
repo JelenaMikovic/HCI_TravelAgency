@@ -83,9 +83,9 @@ namespace TravelAgency.views
                             Location = attraction.Location.Address,
                             Id = attraction.Id,
                             TourID = attraction.TourID,
-                            Description = attraction.Description,
+                            Description = (attraction.Description.Length > 88 ? attraction.Description.Substring(0, 88) : attraction.Description) + "...",
                             Name = attraction.Name,
-                            //Image = (BitmapImage)converter.Convert(attraction.Picture, null, null, null)
+                            Image = (BitmapImage)converter.Convert(attraction.Picture, null, null, null)
                         });
                     }
                 }
@@ -107,14 +107,14 @@ namespace TravelAgency.views
                 {
                     if (restaurant.TourID == this.selectedTripId && restaurant.isDeleted == false)
                     {
-                        attractions.Add(new TripAttraction
+                        restaurants.Add(new TripRestaurant
                         {
                             Location = restaurant.Location.Address,
                             Id = restaurant.Id,
                             TourID = restaurant.TourID,
-                            Description = restaurant.Description,
+                            Description = (restaurant.Description.Length > 88 ? restaurant.Description.Substring(0, 88) : restaurant.Description) + "...",
                             Name = restaurant.Name,
-                            //Image = (BitmapImage)converter.Convert(restaurant.Picture, null, null, null)
+                            Image = (BitmapImage)converter.Convert(restaurant.Picture, null, null, null)
                         });
                     }
                 }
@@ -143,7 +143,7 @@ namespace TravelAgency.views
                             TourID = accomondation.TourID,
                             Type = accomondation.Type.ToString(),
                             Name = accomondation.Name,
-                            //Image = (BitmapImage)converter.Convert(accomondation.Picture, null, null, null)
+                            Image = (BitmapImage)converter.Convert(accomondation.Picture, null, null, null)
                         });
                     }
                 }
