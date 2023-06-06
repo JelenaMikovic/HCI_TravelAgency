@@ -9,14 +9,33 @@
 
   <ItemGroup>
     <None Remove="travel.png" />
+    <None Remove="views\available.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="travel.png" />
+    <Resource Include="views\available.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Fonts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.5" />
+    <PackageReference Include="System.Reactive" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\..\.nuget\packages\entityframework\6.4.4\lib\netstandard2.1\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\..\.nuget\packages\entityframework\6.4.4\lib\netstandard2.1\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

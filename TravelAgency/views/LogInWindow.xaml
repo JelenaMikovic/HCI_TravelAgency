@@ -21,33 +21,24 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style TargetType="PasswordBox" x:Key="RoundPasswordStyle">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="PasswordBox">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+        <Style TargetType="PasswordBox" x:Key="RoundPasswordStyle" BasedOn="{StaticResource {x:Type PasswordBox}}">
+            <Setter Property="Background" Value="#FFD9D9D9"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#FFD9D9D9"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-        <Style TargetType="TextBox" x:Key="RoundTextStyle">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+
+        <Style TargetType="TextBox" x:Key="RoundTextStyle" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Background" Value="#FFD9D9D9"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#FFD9D9D9"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
     <Grid Background="#EAEAEA">
@@ -68,17 +59,26 @@
             </Button.Effect>
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="322,32,0,0" Grid.Row="2" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top"/>
-        <TextBox Style="{StaticResource RoundTextStyle}" HorizontalAlignment="Left" Margin="322,55,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="361" Height="33" Background="#FFD9D9D9" BorderThickness="0,0,0,0" FontFamily="Poppins">
+        <TextBox Name="emailTextBox" Style="{StaticResource RoundTextStyle}" MaxLength="128" IsEnabled="True" HorizontalAlignment="Left" Margin="322,55,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="361" Height="33" Background="#FFD9D9D9" BorderThickness="0,0,0,0" FontFamily="/Fonts/#Poppins" FontSize="16" FontWeight="Light">
             <TextBox.Effect>
                 <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
             </TextBox.Effect>
         </TextBox>
         <TextBlock HorizontalAlignment="Left" Margin="322,119,0,0" Grid.Row="2" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" TextWrapping="Wrap" Text="Šifra" VerticalAlignment="Top"/>
-        <PasswordBox Style="{StaticResource RoundPasswordStyle}" HorizontalAlignment="Left" Margin="322,145,0,0" Grid.Row="2" VerticalAlignment="Top" Width="362" Height="33" Background="#FFD9D9D9" BorderThickness="0,0,0,0" FontFamily="Poppins">
+        <PasswordBox Name="passwordBox" Style="{StaticResource RoundPasswordStyle}" MaxLength="128" FontSize="16" IsEnabled="True" HorizontalAlignment="Left" Margin="322,145,0,0" Grid.Row="2" VerticalAlignment="Top" Width="362" Height="33" Background="#FFD9D9D9" BorderThickness="0,0,0,0">
             <PasswordBox.Effect>
                 <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
             </PasswordBox.Effect>
         </PasswordBox>
-        <Label Content="Nemate nalog? Registrujte se!" HorizontalAlignment="Left" Margin="398,248,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14"/>
+        <Button HorizontalAlignment="Left" Margin="398,248,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" Background="Transparent" BorderThickness="0" Click="Register" >
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <ContentPresenter />
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Content>
+                <TextBlock Text="Nemate nalog? Registrujte se!" />
+            </Button.Content>
+        </Button>
     </Grid>
 </Window>

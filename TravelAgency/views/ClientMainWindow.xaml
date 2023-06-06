@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelAgency"
         mc:Ignorable="d"
-        Title="ClientMainWindow"  WindowStyle="None" AllowsTransparency="True" Height="450" Width="800">
+        Title="ClientMainWindow"  WindowStyle="None" AllowsTransparency="True" Height="450" Width="750">
     
     <Grid Background="#EAEAEA">
         <Grid.RowDefinitions>
@@ -15,14 +15,11 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#0C0C0C" Height="45px">
             <Image Height="31px" Width="63" Source="/travel.png" Opacity="0.85" RenderTransformOrigin="-0.412,0.692"/>
-            <Button Content="Početna" Margin="5" Click="Button_Click" FontFamily="Fonts/#Poppins" FontSize="14px" FontWeight="Light" Foreground="#EAEAEA" Background="#00DDDDDD" BorderThickness="0,0,0,0" />
-            <Button Content="Kupljena putovanja" Margin="5" Click="Button_Click" FontFamily="Fonts/#Poppins" FontSize="14px" FontWeight="Light" Foreground="#EAEAEA" Background="#00DDDDDD" BorderThickness="0,0,0,0" />
-            <Button Content="Rezervisana putovanja" Margin="5" Click="Button_Click" FontFamily="Fonts/#Poppins" FontSize="14px" FontWeight="Light" Foreground="#EAEAEA" Background="#00DDDDDD" BorderThickness="0,0,0,0" />
+            <Button Content="Početna" Margin="5" Click="Button_Click" FontFamily="Fonts/#Poppins" FontSize="14px" FontWeight="Light" Foreground="#EAEAEA" Background="#00DDDDDD" BorderThickness="0,0,0,0" Tag="Home" />
+            <Button Content="Kupljena putovanja" Margin="5" Click="Button_Click" FontFamily="Fonts/#Poppins" FontSize="14px" FontWeight="Light" Foreground="#EAEAEA" Background="#00DDDDDD" BorderThickness="0,0,0,0" Tag="Purchased" />
+            <Button Content="Rezervisana putovanja" Margin="5" Click="Button_Click" FontFamily="Fonts/#Poppins" FontSize="14px" FontWeight="Light" Foreground="#EAEAEA" Background="#00DDDDDD" BorderThickness="0,0,0,0" Tag="Reserved" />
             <Button Content="Odjavi se" Margin="270,0,0,0" FontFamily="Fonts/#Poppins" FontSize="14px" FontWeight="Light" Foreground="#EAEAEA" Background="#00DDDDDD" BorderThickness="0,0,0,0"  Click="LogOut"/>
         </StackPanel>
-
-        <Grid Grid.Row="1" Background="White">
-            <!-- Add your page content here -->
-        </Grid>
+        <ContentControl Grid.Row="1" x:Name="contentControl" />
     </Grid>
 </Window>

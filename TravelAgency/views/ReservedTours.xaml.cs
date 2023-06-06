@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TravelAgency
+namespace TravelAgency.views
 {
     /// <summary>
-    /// Interaction logic for ClientMainWindow.xaml
+    /// Interaction logic for ReservedTours.xaml
     /// </summary>
-    public partial class ClientMainWindow : Window
+    public partial class ReservedTours : UserControl
     {
-        public ClientMainWindow()
+        public ReservedTours()
         {
             InitializeComponent();
         }

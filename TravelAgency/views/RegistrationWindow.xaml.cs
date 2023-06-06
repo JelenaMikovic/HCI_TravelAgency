@@ -15,13 +15,23 @@ using System.Windows.Shapes;
 namespace TravelAgency
 {
     /// <summary>
-    /// Interaction logic for LogInWindow.xaml
+    /// Interaction logic for RegistrationWindow.xaml
     /// </summary>
-    public partial class LogInWindow : Window
+    public partial class RegistrationWindow : Window
     {
-        public LogInWindow()
+        public RegistrationWindow()
         {
             InitializeComponent();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Register(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

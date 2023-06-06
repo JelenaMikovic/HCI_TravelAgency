@@ -28,5 +28,10 @@ namespace TravelAgency
         {
 
         }
+
+        private void LogOut(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
