@@ -154,7 +154,17 @@ namespace TravelAgency.views
             }
             return accomondations;
         }
-        
+
+        public void Buy()
+        {
+
+        }
+
+        public void Reserve()
+        {
+
+        }
+
     }
 
     public class TripAttraction
