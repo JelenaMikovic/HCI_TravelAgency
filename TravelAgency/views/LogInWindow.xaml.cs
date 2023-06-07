@@ -36,11 +36,8 @@ namespace TravelAgency
 
             private void LogIn(object sender, RoutedEventArgs e)
         {
-            ClientMainWindow mainWindow = new ClientMainWindow();
-            Application.Current.MainWindow = mainWindow;
-            mainWindow.Show();
-            Close();
-            /*string email = emailTextBox.Text.Trim();
+
+            string email = emailTextBox.Text.Trim();
             string password = passwordBox.Password.Trim();
 
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
@@ -77,7 +74,7 @@ namespace TravelAgency
             else
             {
                 MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }*/
+            }
         }
     }
 }

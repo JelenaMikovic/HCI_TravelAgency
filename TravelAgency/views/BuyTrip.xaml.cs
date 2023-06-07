@@ -20,9 +20,9 @@ using TravelAgency.model;
 namespace TravelAgency.views
 {
     /// <summary>
-    /// Interaction logic for ReserveTrip.xaml
+    /// Interaction logic for BuyTrip.xaml
     /// </summary>
-    public partial class ReserveTrip : UserControl
+    public partial class BuyTrip : UserControl
     {
         private int selectedTripId;
         public Trip detailedTrip { get; set; }
@@ -32,7 +32,7 @@ namespace TravelAgency.views
         public List<TripAttraction> selctedAttractions { get; set; }
         public List<TripRestaurant> selectedRestaurants { get; set; }
         public List<TripAccomodation> selectedAccomondation { get; set; }
-        public ReserveTrip(int selectedTripId)
+        public BuyTrip(int selectedTripId)
         {
             InitializeComponent();
             this.selectedTripId = selectedTripId;
@@ -165,30 +165,33 @@ namespace TravelAgency.views
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            if(currentStep == 1)
+            if (currentStep == 1)
             {
                 selctedAttractions.Clear();
                 foreach (var selectedItem in attractionList.SelectedItems)
                 {
                     selctedAttractions.Add((TripAttraction)selectedItem);
                 }
-            } else if (currentStep == 2)
+            }
+            else if (currentStep == 2)
             {
                 selectedRestaurants.Clear();
                 foreach (var selectedItem in restaurantList.SelectedItems)
                 {
                     selectedRestaurants.Add((TripRestaurant)selectedItem);
                 }
-            } else if (currentStep == 3)
+            }
+            else if (currentStep == 3)
             {
                 if (accomondationList.SelectedItem != null)
                 {
                     selectedAccomondation.Clear();
                     selectedAccomondation.Add((TripAccomodation)accomondationList.SelectedItem);
-                    FinilzeReservation reservation = new FinilzeReservation(selctedAttractions, selectedAccomondation, selectedRestaurants, detailedTrip);
+                    FinilizeBuy reservation = new FinilizeBuy(selctedAttractions, selectedAccomondation, selectedRestaurants, detailedTrip);
                     ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
                     clientMainWindow.contentControl.Content = reservation;
-                } else
+                }
+                else
                 {
                     MessageBox.Show("Morate da izaberete smestaj!", "Nepravilno odabrano", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     return;
@@ -217,7 +220,7 @@ namespace TravelAgency.views
             Step3Content.Visibility = currentStep == 3 ? Visibility.Visible : Visibility.Collapsed;
 
             PreviousButton.Visibility = currentStep == 1 ? Visibility.Collapsed : Visibility.Visible;
-            NextButton.Content = currentStep == 3 ? "Rezervisi" : "Dalje";
+            NextButton.Content = currentStep == 3 ? "Kupi" : "Dalje";
         }
     }
 }

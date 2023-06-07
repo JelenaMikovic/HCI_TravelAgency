@@ -20,30 +20,27 @@ using TravelAgency.model;
 namespace TravelAgency.views
 {
     /// <summary>
-    /// Interaction logic for ReserveTrip.xaml
+    /// Interaction logic for ReservedTourDetails.xaml
     /// </summary>
-    public partial class ReserveTrip : UserControl
+    public partial class ReservedTourDetails : UserControl
     {
         private int selectedTripId;
+        private int attractionId;
+        private int restaurantId;
         public Trip detailedTrip { get; set; }
         public ObservableCollection<TripAttraction> attractions { get; set; }
         public ObservableCollection<TripAccomodation> accomondations { get; set; }
         public ObservableCollection<TripRestaurant> restaurants { get; set; }
-        public List<TripAttraction> selctedAttractions { get; set; }
-        public List<TripRestaurant> selectedRestaurants { get; set; }
-        public List<TripAccomodation> selectedAccomondation { get; set; }
-        public ReserveTrip(int selectedTripId)
+
+        public ReservedTourDetails(int selectedTripId)
         {
-            InitializeComponent();
             this.selectedTripId = selectedTripId;
+            InitializeComponent();
             DataContext = this;
             detailedTrip = GetTrip();
             attractions = GetAttractions();
             accomondations = GetAccomondations();
             restaurants = GetRestaurants();
-            selctedAttractions = new List<TripAttraction>();
-            selectedRestaurants = new List<TripRestaurant>();
-            selectedAccomondation = new List<TripAccomodation>();
         }
 
         public Trip GetTrip()
@@ -52,7 +49,8 @@ namespace TravelAgency.views
             Trip found = new Trip();
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
-                Tour tour = dbContext.Tours.Find(this.selectedTripId);
+                ReservedTour reservedTour = dbContext.ReservedTours.Find(this.selectedTripId);
+                Tour tour = dbContext.Tours.Find(reservedTour.TourId);
                 if (tour != null)
                 {
                     found = new Trip
@@ -60,7 +58,7 @@ namespace TravelAgency.views
                         Location = tour.Name,
                         DateRange = tour.From.ToString("d") + " - " + tour.To.ToString("d") + " (" + (int)(tour.To - tour.From).TotalDays + " dana)",
                         Price = tour.Price,
-                        Id = tour.Id,
+                        Id = selectedTripId,
                         Image = (BitmapImage)converter.Convert(tour.Picture, null, null, null)
                     };
                 }
@@ -78,10 +76,9 @@ namespace TravelAgency.views
             attractions = new ObservableCollection<TripAttraction>();
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
-                foreach (Attraction attraction in dbContext.Attractions)
+                ReservedTour reservedTour = dbContext.ReservedTours.Find(this.selectedTripId);
+                foreach (Attraction attraction in reservedTour.Attractions)
                 {
-                    if (attraction.TourID == this.selectedTripId && attraction.isDeleted == false)
-                    {
                         attractions.Add(new TripAttraction
                         {
                             Location = attraction.Location.Address,
@@ -91,7 +88,6 @@ namespace TravelAgency.views
                             Name = attraction.Name,
                             Image = (BitmapImage)converter.Convert(attraction.Picture, null, null, null)
                         });
-                    }
                 }
             }
             else
@@ -107,10 +103,9 @@ namespace TravelAgency.views
             restaurants = new ObservableCollection<TripRestaurant>();
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
-                foreach (Restaurant restaurant in dbContext.Restaurants)
+                ReservedTour reservedTour = dbContext.ReservedTours.Find(this.selectedTripId);
+                foreach (Restaurant restaurant in reservedTour.Restaurants)
                 {
-                    if (restaurant.TourID == this.selectedTripId && restaurant.isDeleted == false)
-                    {
                         restaurants.Add(new TripRestaurant
                         {
                             Location = restaurant.Location.Address,
@@ -120,7 +115,6 @@ namespace TravelAgency.views
                             Name = restaurant.Name,
                             Image = (BitmapImage)converter.Convert(restaurant.Picture, null, null, null)
                         });
-                    }
                 }
             }
             else
@@ -136,11 +130,10 @@ namespace TravelAgency.views
             accomondations = new ObservableCollection<TripAccomodation>();
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
-                foreach (Accomondation accomondation in dbContext.Accomondations)
-                {
-                    if (accomondation.TourID == this.selectedTripId && accomondation.isDeleted == false)
-                    {
-                        accomondations.Add(new TripAccomodation
+                ReservedTour reservedTour = dbContext.ReservedTours.Find(this.selectedTripId);
+
+                Accomondation accomondation = reservedTour.Accomondation;
+                accomondations.Add(new TripAccomodation
                         {
                             Location = accomondation.Location.Address,
                             Id = accomondation.Id,
@@ -149,8 +142,6 @@ namespace TravelAgency.views
                             Name = accomondation.Name,
                             Image = (BitmapImage)converter.Convert(accomondation.Picture, null, null, null)
                         });
-                    }
-                }
             }
             else
             {
@@ -159,65 +150,47 @@ namespace TravelAgency.views
             return accomondations;
         }
 
-        private int currentStep = 1;
-
-        public int SelectedTripId { get; }
-
-        private void NextButton_Click(object sender, RoutedEventArgs e)
+        public void Buy(object sender, RoutedEventArgs e)
         {
-            if(currentStep == 1)
+
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            FutureTrips futureTrips = new FutureTrips();
+            ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+            clientMainWindow.contentControl.Content = futureTrips;
+        }
+
+        private void Back(object sender, RoutedEventArgs e)
+        {
+            ReservedTours reservedTours = new ReservedTours();
+            ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+            clientMainWindow.contentControl.Content = reservedTours;
+        }
+
+        private void AttractionSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (attractionList.SelectedItem != null)
             {
-                selctedAttractions.Clear();
-                foreach (var selectedItem in attractionList.SelectedItems)
-                {
-                    selctedAttractions.Add((TripAttraction)selectedItem);
-                }
-            } else if (currentStep == 2)
-            {
-                selectedRestaurants.Clear();
-                foreach (var selectedItem in restaurantList.SelectedItems)
-                {
-                    selectedRestaurants.Add((TripRestaurant)selectedItem);
-                }
-            } else if (currentStep == 3)
-            {
-                if (accomondationList.SelectedItem != null)
-                {
-                    selectedAccomondation.Clear();
-                    selectedAccomondation.Add((TripAccomodation)accomondationList.SelectedItem);
-                    FinilzeReservation reservation = new FinilzeReservation(selctedAttractions, selectedAccomondation, selectedRestaurants, detailedTrip);
-                    ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
-                    clientMainWindow.contentControl.Content = reservation;
-                } else
-                {
-                    MessageBox.Show("Morate da izaberete smestaj!", "Nepravilno odabrano", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                    return;
-                }
-            }
-            if (currentStep < 3)
-            {
-                currentStep++;
-                UpdateStepContentVisibility();
+                var attractionId = ((TripAttraction)attractionList.SelectedItem).Id;
+                this.attractionId = attractionId;
+                AtractionDetails atractionDetails = new AtractionDetails(selectedTripId, attractionId);
+                ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                clientMainWindow.contentControl.Content = atractionDetails;
             }
         }
 
-        private void PreviousButton_Click(object sender, RoutedEventArgs e)
+        private void RestaurantSelected(object sender, SelectionChangedEventArgs e)
         {
-            if (currentStep > 1)
+            if (restaurantList.SelectedItem != null)
             {
-                currentStep--;
-                UpdateStepContentVisibility();
+                var restaurantId = ((TripRestaurant)restaurantList.SelectedItem).Id;
+                this.restaurantId = restaurantId;
+                RestaurantDetails atractionDetails = new RestaurantDetails(selectedTripId, restaurantId);
+                ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                clientMainWindow.contentControl.Content = atractionDetails;
             }
-        }
-
-        private void UpdateStepContentVisibility()
-        {
-            Step1Content.Visibility = currentStep == 1 ? Visibility.Visible : Visibility.Collapsed;
-            Step2Content.Visibility = currentStep == 2 ? Visibility.Visible : Visibility.Collapsed;
-            Step3Content.Visibility = currentStep == 3 ? Visibility.Visible : Visibility.Collapsed;
-
-            PreviousButton.Visibility = currentStep == 1 ? Visibility.Collapsed : Visibility.Visible;
-            NextButton.Content = currentStep == 3 ? "Rezervisi" : "Dalje";
         }
     }
 }

@@ -20,12 +20,12 @@ using TravelAgency.model;
 namespace TravelAgency.views
 {
     /// <summary>
-    /// Interaction logic for ReservedTours.xaml
+    /// Interaction logic for BoughtTours.xaml
     /// </summary>
-    public partial class ReservedTours : UserControl
+    public partial class BoughtTours : UserControl
     {
         public ObservableCollection<Trip> Trips { get; set; }
-        public ReservedTours()
+        public BoughtTours()
         {
             InitializeComponent();
             DataContext = this;
@@ -39,9 +39,10 @@ namespace TravelAgency.views
             Trips = new ObservableCollection<Trip>();
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
-                foreach (ReservedTour reservedTour in dbContext.ReservedTours)
+                foreach (BoughtTour reservedTour in dbContext.BoughtTours)
                 {
-                    if(reservedTour.UserId == LoggedInUser.CurrentUser.Id) {
+                    if (reservedTour.UserId == LoggedInUser.CurrentUser.Id)
+                    {
                         Tour tour = dbContext.Tours.Find(reservedTour.TourId);
                         Trips.Add(new Trip
                         {
@@ -52,7 +53,7 @@ namespace TravelAgency.views
                             Image = (BitmapImage)converter.Convert(tour.Picture, null, null, null)
                         });
                     }
-                    
+
                 }
             }
             else
@@ -70,7 +71,7 @@ namespace TravelAgency.views
             {
                 var selectedTripId = ((Trip)tripListBox.SelectedItem).Id;
                 SelectedTripId = selectedTripId;
-                ReservedTourDetails tourDetails = new ReservedTourDetails(selectedTripId);
+                BoughtTourDetails tourDetails = new BoughtTourDetails(selectedTripId);
                 ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
                 clientMainWindow.contentControl.Content = tourDetails;
             }
