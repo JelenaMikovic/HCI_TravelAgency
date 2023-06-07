@@ -41,7 +41,8 @@ namespace TravelAgency
                     content = new TourDetails(1);
                     break;
                 case "Reserved":
-                    content = new FutureTrips();
+                    //content = new FutureTrips();
+                    content = new CreateNewAttraction();
                     break;
                     // Add more cases for additional buttons if needed
             }
