@@ -83,7 +83,6 @@ namespace TravelAgency.views
                         ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
                         clientMainWindow.contentControl.Content = tourDetails;
                     }
-                }
             }
             else {
                 MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
