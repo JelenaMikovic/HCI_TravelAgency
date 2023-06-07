@@ -18,17 +18,16 @@ using TravelAgency.model;
 namespace TravelAgency.views
 {
     /// <summary>
-    /// Interaction logic for FinilzeReservation.xaml
+    /// Interaction logic for FinilizeBuy.xaml
     /// </summary>
-    public partial class FinilzeReservation : UserControl
+    public partial class FinilizeBuy : UserControl
     {
-
         public List<TripAttraction> attractions { get; set; }
         public List<TripAccomodation> accomondations { get; set; }
         public List<TripRestaurant> restaurants { get; set; }
         public Trip detailedTrip { get; set; }
 
-        public FinilzeReservation(List<TripAttraction> selctedAttractions, List<TripAccomodation> selectedAccomondation, List<TripRestaurant> selectedRestaurants, Trip detailedTrip)
+        public FinilizeBuy(List<TripAttraction> selctedAttractions, List<TripAccomodation> selectedAccomondation, List<TripRestaurant> selectedRestaurants, Trip detailedTrip)
         {
             InitializeComponent();
             attractions = selctedAttractions;
@@ -42,25 +41,25 @@ namespace TravelAgency.views
 
         }
 
-        private void Reserve(object sender, RoutedEventArgs e)
+        private void Buy(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Uspesno ste obavili rezervaciju!", "Obavljena rezervaija", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Uspesno ste kupili putovanje!", "Obavljena upovina", MessageBoxButton.OK, MessageBoxImage.Information);
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
                 List<Attraction> atr = new List<Attraction>();
-                foreach(TripAttraction i in attractions)
+                foreach (TripAttraction i in attractions)
                 {
                     atr.Add(dbContext.Attractions.Find(i.Id));
                 }
                 List<Restaurant> res = new List<Restaurant>();
-                foreach(TripRestaurant i in restaurants)
+                foreach (TripRestaurant i in restaurants)
                 {
                     res.Add(dbContext.Restaurants.Find(i.Id));
                 }
                 Accomondation acc = dbContext.Accomondations.Find(accomondations[0].Id);
-                dbContext.ReservedTours.Add(new ReservedTour
+                dbContext.BoughtTours.Add(new BoughtTour
                 {
-                    Id = dbContext.ReservedTours.Count()+100,
+                    Id = dbContext.ReservedTours.Count() + 200,
                     TourId = detailedTrip.Id,
                     UserId = LoggedInUser.CurrentUser.Id,
                     Attractions = atr,
@@ -71,7 +70,7 @@ namespace TravelAgency.views
 
                 dbContext.SaveChanges();
             }
-            ReservedTours reservation = new ReservedTours();
+            BoughtTours reservation = new BoughtTours();
             ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
             clientMainWindow.contentControl.Content = reservation;
         }

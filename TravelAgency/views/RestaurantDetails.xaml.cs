@@ -64,15 +64,20 @@ namespace TravelAgency.views
         {
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
-                if (dbContext.ReservedTours.Find(selectedTripId) == null)
+                if (dbContext.ReservedTours.Find(selectedTripId) != null)
                 {
-                    TourDetails tourDetails = new TourDetails(selectedTripId);
+                    ReservedTourDetails tourDetails = new ReservedTourDetails(selectedTripId);
                     ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
                     clientMainWindow.contentControl.Content = tourDetails;
                 }
-                else
+                else if(dbContext.BoughtTours.Find(selectedTripId) != null)
                 {
-                    ReservedTourDetails tourDetails = new ReservedTourDetails(selectedTripId);
+                    BoughtTourDetails tourDetails = new BoughtTourDetails(selectedTripId);
+                    ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                    clientMainWindow.contentControl.Content = tourDetails;
+                } else
+                {
+                    TourDetails tourDetails = new TourDetails(selectedTripId);
                     ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
                     clientMainWindow.contentControl.Content = tourDetails;
                 }

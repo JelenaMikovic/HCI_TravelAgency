@@ -23,6 +23,8 @@ namespace TravelAgency
         public ClientMainWindow()
         {
             InitializeComponent();
+            UserControl content = new FutureTrips();
+            contentControl.Content = content;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -31,14 +33,14 @@ namespace TravelAgency
             string tag = clickedButton.Tag.ToString();
 
             // Create the corresponding user control based on the tag value
-            UserControl content = null;
+            UserControl content = new UserControl();
             switch (tag)
             {
                 case "Home":
                     content = new FutureTrips();
                     break;
                 case "Purchased":
-                    content = new TourDetails(1);
+                    content = new BoughtTours();
                     break;
                 case "Reserved":
                     content = new ReservedTours();
@@ -53,7 +55,10 @@ namespace TravelAgency
 
         private void LogOut(object sender, RoutedEventArgs e)
         {
-
+            LogInWindow mainWindow = new LogInWindow();
+            Application.Current.MainWindow = mainWindow;
+            mainWindow.Show();
+            Close();
         }
 
     }
