@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,9 +20,9 @@ using TravelAgency.model;
 namespace TravelAgency.views
 {
     /// <summary>
-    /// Interaction logic for TourDetails.xaml
+    /// Interaction logic for ReservedTourDetails.xaml
     /// </summary>
-    public partial class TourDetails : UserControl
+    public partial class ReservedTourDetails : UserControl
     {
         private int selectedTripId;
         private int attractionId;
@@ -33,7 +32,7 @@ namespace TravelAgency.views
         public ObservableCollection<TripAccomodation> accomondations { get; set; }
         public ObservableCollection<TripRestaurant> restaurants { get; set; }
 
-        public TourDetails(int selectedTripId)
+        public ReservedTourDetails(int selectedTripId)
         {
             this.selectedTripId = selectedTripId;
             InitializeComponent();
@@ -50,7 +49,8 @@ namespace TravelAgency.views
             Trip found = new Trip();
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
-                Tour tour = dbContext.Tours.Find(this.selectedTripId);
+                ReservedTour reservedTour = dbContext.ReservedTours.Find(this.selectedTripId);
+                Tour tour = dbContext.Tours.Find(reservedTour.TourId);
                 if (tour != null)
                 {
                     found = new Trip
@@ -58,7 +58,7 @@ namespace TravelAgency.views
                         Location = tour.Name,
                         DateRange = tour.From.ToString("d") + " - " + tour.To.ToString("d") + " (" + (int)(tour.To - tour.From).TotalDays + " dana)",
                         Price = tour.Price,
-                        Id = tour.Id,
+                        Id = selectedTripId,
                         Image = (BitmapImage)converter.Convert(tour.Picture, null, null, null)
                     };
                 }
@@ -76,10 +76,9 @@ namespace TravelAgency.views
             attractions = new ObservableCollection<TripAttraction>();
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
-                foreach (Attraction attraction in dbContext.Attractions)
+                ReservedTour reservedTour = dbContext.ReservedTours.Find(this.selectedTripId);
+                foreach (Attraction attraction in reservedTour.Attractions)
                 {
-                    if(attraction.TourID == this.selectedTripId && attraction.isDeleted == false)
-                    {
                         attractions.Add(new TripAttraction
                         {
                             Location = attraction.Location.Address,
@@ -89,7 +88,6 @@ namespace TravelAgency.views
                             Name = attraction.Name,
                             Image = (BitmapImage)converter.Convert(attraction.Picture, null, null, null)
                         });
-                    }
                 }
             }
             else
@@ -105,10 +103,9 @@ namespace TravelAgency.views
             restaurants = new ObservableCollection<TripRestaurant>();
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
-                foreach (Restaurant restaurant in dbContext.Restaurants)
+                ReservedTour reservedTour = dbContext.ReservedTours.Find(this.selectedTripId);
+                foreach (Restaurant restaurant in reservedTour.Restaurants)
                 {
-                    if (restaurant.TourID == this.selectedTripId && restaurant.isDeleted == false)
-                    {
                         restaurants.Add(new TripRestaurant
                         {
                             Location = restaurant.Location.Address,
@@ -118,7 +115,6 @@ namespace TravelAgency.views
                             Name = restaurant.Name,
                             Image = (BitmapImage)converter.Convert(restaurant.Picture, null, null, null)
                         });
-                    }
                 }
             }
             else
@@ -134,11 +130,10 @@ namespace TravelAgency.views
             accomondations = new ObservableCollection<TripAccomodation>();
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
-                foreach (Accomondation accomondation in dbContext.Accomondations)
-                {
-                    if (accomondation.TourID == this.selectedTripId && accomondation.isDeleted == false)
-                    {
-                        accomondations.Add(new TripAccomodation
+                ReservedTour reservedTour = dbContext.ReservedTours.Find(this.selectedTripId);
+
+                Accomondation accomondation = reservedTour.Accomondation;
+                accomondations.Add(new TripAccomodation
                         {
                             Location = accomondation.Location.Address,
                             Id = accomondation.Id,
@@ -147,8 +142,6 @@ namespace TravelAgency.views
                             Name = accomondation.Name,
                             Image = (BitmapImage)converter.Convert(accomondation.Picture, null, null, null)
                         });
-                    }
-                }
             }
             else
             {
@@ -159,22 +152,21 @@ namespace TravelAgency.views
 
         public void Buy(object sender, RoutedEventArgs e)
         {
-            
-        }
-
-        public void Reserve(object sender, RoutedEventArgs e)
-        {
-            ReserveTrip futureTrips = new ReserveTrip(selectedTripId);
-            ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
-            clientMainWindow.contentControl.Content = futureTrips;
 
         }
 
-        private void Back(object sender, RoutedEventArgs e)
+        private void Cancel(object sender, RoutedEventArgs e)
         {
             FutureTrips futureTrips = new FutureTrips();
             ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
             clientMainWindow.contentControl.Content = futureTrips;
+        }
+
+        private void Back(object sender, RoutedEventArgs e)
+        {
+            ReservedTours reservedTours = new ReservedTours();
+            ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+            clientMainWindow.contentControl.Content = reservedTours;
         }
 
         private void AttractionSelected(object sender, SelectionChangedEventArgs e)
@@ -201,37 +193,4 @@ namespace TravelAgency.views
             }
         }
     }
-
-    public class TripAttraction
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Location { get; set; }
-        public string Description { get; set; }
-        public BitmapImage Image { get; set; }
-        public int TourID { get; set; }
-    }
-
-    public class TripRestaurant
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-
-        public string Location { get; set; }
-        public BitmapImage Image { get; set; }
-        public int TourID { get; set; }
-
-    }
-
-    public class TripAccomodation
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Location { get; set; }
-        public string Type { get; set; }
-        public int TourID { get; set; }
-        public BitmapImage Image { get; set; }
-    }
-
 }

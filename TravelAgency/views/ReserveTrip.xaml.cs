@@ -31,7 +31,7 @@ namespace TravelAgency.views
         public ObservableCollection<TripRestaurant> restaurants { get; set; }
         public List<TripAttraction> selctedAttractions { get; set; }
         public List<TripRestaurant> selectedRestaurants { get; set; }
-        public TripAccomodation selectedAccomondation { get; set; }
+        public List<TripAccomodation> selectedAccomondation { get; set; }
         public ReserveTrip(int selectedTripId)
         {
             InitializeComponent();
@@ -43,6 +43,7 @@ namespace TravelAgency.views
             restaurants = GetRestaurants();
             selctedAttractions = new List<TripAttraction>();
             selectedRestaurants = new List<TripRestaurant>();
+            selectedAccomondation = new List<TripAccomodation>();
         }
 
         public Trip GetTrip()
@@ -182,7 +183,11 @@ namespace TravelAgency.views
             {
                 if (accomondationList.SelectedItem != null)
                 {
-                    selectedAccomondation = (TripAccomodation)accomondationList.SelectedItem;
+                    selectedAccomondation.Clear();
+                    selectedAccomondation.Add((TripAccomodation)accomondationList.SelectedItem);
+                    FinilzeReservation reservation = new FinilzeReservation(selctedAttractions, selectedAccomondation, selectedRestaurants, detailedTrip);
+                    ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                    clientMainWindow.contentControl.Content = reservation;
                 } else
                 {
                     MessageBox.Show("Morate da izaberete smestaj!", "Nepravilno odabrano", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -212,7 +217,7 @@ namespace TravelAgency.views
             Step3Content.Visibility = currentStep == 3 ? Visibility.Visible : Visibility.Collapsed;
 
             PreviousButton.Visibility = currentStep == 1 ? Visibility.Collapsed : Visibility.Visible;
-            NextButton.Content = currentStep == 3 ? "Kupi" : "Dalje";
+            NextButton.Content = currentStep == 3 ? "Rezervisi" : "Dalje";
         }
     }
 }

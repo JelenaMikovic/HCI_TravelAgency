@@ -62,9 +62,25 @@ namespace TravelAgency.views
 
         private void Back(object sender, RoutedEventArgs e)
         {
-            TourDetails tourDetails = new TourDetails(selectedTripId);
-            ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
-            clientMainWindow.contentControl.Content = tourDetails;
+            if (Application.Current.Resources["DbContext"] is DbContext dbContext)
+            {
+                if (dbContext.ReservedTours.Find(selectedTripId) == null)
+                {
+                    TourDetails tourDetails = new TourDetails(selectedTripId);
+                    ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                    clientMainWindow.contentControl.Content = tourDetails;
+                }
+                else
+                {
+                    ReservedTourDetails tourDetails = new ReservedTourDetails(selectedTripId);
+                    ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                    clientMainWindow.contentControl.Content = tourDetails;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
