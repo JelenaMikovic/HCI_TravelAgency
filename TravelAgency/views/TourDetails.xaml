@@ -73,7 +73,7 @@
                                         <DropShadowEffect Opacity="0.25" BlurRadius="15"/>
                                     </Rectangle.Effect>
                                 </Rectangle>
-                                <Border Width="196" Height="59" Margin="0,0,0,0" BorderThickness="0" BorderBrush="#00000000" VerticalAlignment="Top">
+                                <Border Width="196" Height="59" Margin="-4,0,0,0" BorderThickness="0" BorderBrush="#00000000" VerticalAlignment="Top">
                                     <Border.CornerRadius>
                                         <CornerRadius TopLeft="5" TopRight="5" BottomRight="0" BottomLeft="0"/>
                                     </Border.CornerRadius>
@@ -88,7 +88,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
                 <Label Content="Ponuđeni restorani" HorizontalAlignment="Left" FontSize="14" FontWeight="Medium" Foreground="#FF0C0C0C"/>
-                <ListBox ItemsSource="{Binding restaurants}" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="170" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                <ListBox ItemsSource="{Binding restaurants}" x:Name="restaurantList" SelectionChanged="RestaurantSelected" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="170" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel IsItemsHost="True" />
@@ -97,6 +97,7 @@
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="Margin" Value="0" />
+                            <Setter Property="Tag" Value="{Binding Id}" />
                         </Style>
                     </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
@@ -107,7 +108,7 @@
                                         <DropShadowEffect Opacity="0.25" BlurRadius="15"/>
                                     </Rectangle.Effect>
                                 </Rectangle>
-                                <Border Width="196" Height="59" Margin="0,0,0,0" BorderThickness="0" BorderBrush="#00000000" VerticalAlignment="Top">
+                                <Border Width="196" Height="59" Margin="-4,0,0,0" BorderThickness="0" BorderBrush="#00000000" VerticalAlignment="Top">
                                     <Border.CornerRadius>
                                         <CornerRadius TopLeft="5" TopRight="5" BottomRight="0" BottomLeft="0"/>
                                     </Border.CornerRadius>
@@ -141,7 +142,7 @@
                                         <DropShadowEffect Opacity="0.25" BlurRadius="15"/>
                                     </Rectangle.Effect>
                                 </Rectangle>
-                                <Border Width="196" Height="59" Margin="0,0,0,0" BorderThickness="0" BorderBrush="#00000000" VerticalAlignment="Top">
+                                <Border Width="196" Height="59" Margin="-4,0,0,0" BorderThickness="0" BorderBrush="#00000000" VerticalAlignment="Top">
                                     <Border.CornerRadius>
                                         <CornerRadius TopLeft="5" TopRight="5" BottomRight="0" BottomLeft="0"/>
                                     </Border.CornerRadius>
