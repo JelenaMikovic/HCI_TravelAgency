@@ -65,8 +65,6 @@ namespace TravelAgency.views
         {
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
-                if (Application.Current.Resources["DbContext"] is DbContext dbContext)
-                {
                     if (dbContext.ReservedTours.Find(selectedTripId) != null)
                     {
                         ReservedTourDetails tourDetails = new ReservedTourDetails(selectedTripId);
