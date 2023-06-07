@@ -26,6 +26,7 @@ namespace TravelAgency.views
     public partial class TourDetails : UserControl
     {
         private int selectedTripId;
+        private int attractionId;
         public Trip detailedTrip { get; set; }
         public ObservableCollection<TripAttraction> attractions { get; set; }
         public ObservableCollection<TripAccomodation> accomondations { get; set; }
@@ -155,16 +156,34 @@ namespace TravelAgency.views
             return accomondations;
         }
 
-        public void Buy()
+        public void Buy(object sender, RoutedEventArgs e)
         {
 
         }
 
-        public void Reserve()
+        public void Reserve(object sender, RoutedEventArgs e)
         {
 
         }
 
+        private void Back(object sender, RoutedEventArgs e)
+        {
+            FutureTrips futureTrips = new FutureTrips();
+            ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+            clientMainWindow.contentControl.Content = futureTrips;
+        }
+
+        private void AttractionSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (attractionList.SelectedItem != null)
+            {
+                var attractionId = ((TripAttraction)attractionList.SelectedItem).Id;
+                this.attractionId = attractionId;
+                AtractionDetails atractionDetails = new AtractionDetails(selectedTripId, attractionId);
+                ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                clientMainWindow.contentControl.Content = atractionDetails;
+            }
+        }
     }
 
     public class TripAttraction
