@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace TravelAgency
         public AgentMainWindow()
         {
             InitializeComponent();
+            UserControl content = new AgentFutureTrips();
+            contentControl.Content = content;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,7 +38,7 @@ namespace TravelAgency
             switch (tag)
             {
                 case "Home":
-                    //content = new FutureTrips();
+                    content = new AgentFutureTrips();
                     break;
                 case "CreateNew":
                     //content = new TourDetails(1);
@@ -47,7 +50,7 @@ namespace TravelAgency
             }
 
             // Set the content of the ContentControl to the selected user control
-            //contentControl.Content = content;
+            contentControl.Content = content;
         }
 
         private void LogOut(object sender, RoutedEventArgs e)
