@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelAgency.converters;
+using TravelAgency.db;
 using TravelAgency.model;
 
 namespace TravelAgency.views
@@ -23,11 +25,43 @@ namespace TravelAgency.views
     {
         private int selectedTripId;
         private int restaurantId;
+        public TripRestaurant selectedRestaurant;
         public EditRestaurant(int selectedTripId,int restaurantId)
         {
             InitializeComponent();
             this.selectedTripId = selectedTripId;
             this.restaurantId = restaurantId;
+            selectedRestaurant = GetAccomondation();
+        }
+
+        private TripRestaurant GetAccomondation()
+        {
+            var converter = new Base64StringToImageSourceConverter();
+            TripRestaurant Attraction = new TripRestaurant();
+            if (Application.Current.Resources["DbContext"] is DbContext dbContext)
+            {
+                Restaurant attraction = dbContext.Restaurants.Find(restaurantId);
+                Attraction = new TripRestaurant
+                {
+                    Location = attraction.Location.Address,
+                    Id = attraction.Id,
+                    TourID = attraction.TourID,
+                    Description = attraction.Description,
+                    Name = attraction.Name,
+                    Image = (BitmapImage)converter.Convert(attraction.Picture, null, null, null)
+                };
+                DraggedImage.Source = Attraction.Image;
+                DraggedImage.Visibility = Visibility.Visible;
+                adrestxt.Text = Attraction.Location;
+                nametxt.Text = Attraction.Name;
+                desctxt.Text = Attraction.Description;
+            }
+            else
+            {
+                MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return Attraction;
         }
 
         private void OnDrop(object sender, DragEventArgs e)
@@ -64,6 +98,43 @@ namespace TravelAgency.views
             EditRestaurantMain tourDetails = new EditRestaurantMain(selectedTripId,restaurantId);
             AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
             clientMainWindow.contentControl.Content = tourDetails;
+        }
+
+        private void Save(object sender, RoutedEventArgs e)
+        {
+            if (Application.Current.Resources["DbContext"] is DbContext dbContext)
+            {
+                Restaurant attraction = dbContext.Restaurants.Find(restaurantId);
+
+                Location location = dbContext.Locations.Find(attraction.Location.Id);
+                Location newLocation = new Location
+                {
+                    Id = location.Id,
+                    Address = adrestxt.Text,
+                    City = location.City,
+                    Country = location.Country
+                };
+                dbContext.Locations.Remove(location);
+                dbContext.Locations.Add(newLocation);
+                Restaurant updated = new Restaurant
+                {
+                    Id = attraction.Id,
+                    TourID = attraction.TourID,
+                    Name = nametxt.Text,
+                    Description = desctxt.Text,
+                    Picture = attraction.Picture,
+                    Location = newLocation
+                };
+                dbContext.Restaurants.Remove(attraction);
+                dbContext.Restaurants.Add(updated);
+                EditRestaurantMain tourDetails = new EditRestaurantMain(selectedTripId, restaurantId);
+                AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+                clientMainWindow.contentControl.Content = tourDetails;
+            }
+            else
+            {
+                MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
