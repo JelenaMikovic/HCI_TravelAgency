@@ -20,13 +20,13 @@ using TravelAgency.model;
 namespace TravelAgency.views
 {
     /// <summary>
-    /// Interaction logic for AgentMainPage.xaml
+    /// Interaction logic for TripsByMonth.xaml
     /// </summary>
-    public partial class AgentFutureTrips : UserControl
+    public partial class TripsByMonth : UserControl
     {
         public ObservableCollection<Trip> Trips { get; set; }
         private int SelectedTripId { get; set; }
-        public AgentFutureTrips()
+        public TripsByMonth()
         {
             InitializeComponent();
             DataContext = this;
@@ -58,16 +58,23 @@ namespace TravelAgency.views
             return Trips;
         }
 
+        
+
         private void TripListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (tripListBox.SelectedItem != null)
             {
                 var selectedTripId = ((Trip)tripListBox.SelectedItem).Id;
                 SelectedTripId = selectedTripId;
-                TourDetailsAgent tourDetails = new TourDetailsAgent(selectedTripId);
-                AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
-                clientMainWindow.contentControl.Content = tourDetails;
+                TourDetails tourDetails = new TourDetails(selectedTripId);
+                AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+                agentMainWindow.contentControl.Content = tourDetails;
             }
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
