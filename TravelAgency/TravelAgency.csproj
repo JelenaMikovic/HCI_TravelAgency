@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="Fonts\" />
+    <Folder Include="help\pictures\" />
   </ItemGroup>
 
   <ItemGroup>
