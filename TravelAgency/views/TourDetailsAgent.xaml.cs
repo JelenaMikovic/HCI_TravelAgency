@@ -201,8 +201,8 @@ namespace TravelAgency.views
 
                     }
                     Tour t = dbContext.Tours.Find(selectedTripId);
-                    Location location = dbContext.Locations.Find(t.StartingLocation.Id);
-                    dbContext.Locations.Remove(location);
+                    Location loc = dbContext.Locations.Find(t.StartingLocation.Id);
+                    dbContext.Locations.Remove(loc);
                     dbContext.Tours.Remove(t);
                     AgentFutureTrips tourDetails = new AgentFutureTrips();
                     AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
