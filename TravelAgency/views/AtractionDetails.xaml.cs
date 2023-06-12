@@ -65,6 +65,7 @@ namespace TravelAgency.views
         {
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
+                if(LoggedInUser.CurrentUser.UserRole == UserRole.CLIENT) { 
                     if (dbContext.ReservedTours.Find(selectedTripId) != null)
                     {
                         ReservedTourDetails tourDetails = new ReservedTourDetails(selectedTripId);
@@ -83,6 +84,12 @@ namespace TravelAgency.views
                         ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
                         clientMainWindow.contentControl.Content = tourDetails;
                     }
+                } else
+                {
+                    TourDetailsAgent tourDetails = new TourDetailsAgent(selectedTripId);
+                    AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+                    clientMainWindow.contentControl.Content = tourDetails;
+                }
             }
             else {
                 MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
