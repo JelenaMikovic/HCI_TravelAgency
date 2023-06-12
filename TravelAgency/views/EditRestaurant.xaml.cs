@@ -24,5 +24,34 @@ namespace TravelAgency.views
         {
             InitializeComponent();
         }
+
+        private void OnDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files.Length > 0)
+                {
+                    string imagePath = files[0]; // Get the first file path
+                    BitmapImage bitmap = new BitmapImage(new Uri(imagePath));
+                    DraggedImage.Source = bitmap;
+                    DraggedImage.Visibility = Visibility.Visible;
+                    DragLabel.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
+        private void OnDragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effects = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+            e.Handled = true;
+        }
     }
 }

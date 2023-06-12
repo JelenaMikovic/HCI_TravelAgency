@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="TravelAgency.views.EditAttractionMain"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TravelAgency.views"
+             mc:Ignorable="d" 
+             d:DesignHeight="405" d:DesignWidth="750" Foreground="#FFEAEAEA" FontFamily="Fonts/#Poppins">
+    <UserControl.Resources>
+        <Style TargetType="Button" x:Key="RoundButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Image Source="{Binding SelectedAttraction.Image}"  Stretch="UniformToFill" HorizontalAlignment="Left" VerticalAlignment="Top" Height="405" Margin="0,0,0,0" Width="375"/>
+        <Label Content="{Binding SelectedAttraction.Name}" HorizontalAlignment="Left" Margin="382,68,0,0" VerticalAlignment="Top" FontFamily="Fonts/#Poppins" FontSize="22" FontWeight="Medium"/>
+        <Label Content="{Binding SelectedAttraction.Location}" HorizontalAlignment="Left" Margin="382,96,0,0" VerticalAlignment="Top" FontFamily="Fonts/#Poppins" FontSize="10" FontWeight="Light"/>
+        <TextBlock Text="{Binding SelectedAttraction.Description}" HorizontalAlignment="Left" Margin="386,118,0,0" Width="330" TextWrapping="Wrap" TextAlignment="Justify"  FontFamily="Fonts/#Poppins" FontSize="12" FontWeight="Light" VerticalAlignment="Top" Foreground="#FF0C0C0C"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,347,10,10" RenderTransformOrigin="0.448,0.57">
+            <Button Style="{StaticResource RoundButtonStyle}" Content="Izmeni" HorizontalAlignment="Left" Height="40" Grid.Row="2" VerticalAlignment="Top" Width="163" FontFamily="/Fonts/#Poppins" FontSize="14" Foreground="#FFEAEAEA" RenderTransformOrigin="1,0" Background="#FF0C0C0C" BorderThickness="0,0,1,1" BorderBrush="{x:Null}" Click="Edit" >
+                <Button.Effect>
+                    <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
+                </Button.Effect>
+            </Button>
+            <Button Style="{StaticResource RoundButtonStyle}" Content="Obriši" HorizontalAlignment="Left" Height="40" Margin="5,0,0,0"  Grid.Row="2" VerticalAlignment="Top" Width="163" FontFamily="/Fonts/#Poppins" FontSize="14" Foreground="#FF0C0C0C" RenderTransformOrigin="1,0" Background="Transparent" BorderThickness="3" BorderBrush="#FF0C0C0C" Click="Delete" >
+                <Button.Effect>
+                    <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
+                </Button.Effect>
+            </Button>
+        </StackPanel>
+        <Button Style="{StaticResource RoundButtonStyle}" Panel.ZIndex="9999" Content="&lt;Nazad" HorizontalAlignment="Left" Height="18" Margin="5,5,5,5" Grid.Row="2" VerticalAlignment="Top" Width="70" FontFamily="/Fonts/#Poppins" FontSize="12" Foreground="#FF0C0C0C" RenderTransformOrigin="1,0" Background="#FFEAEAEA" BorderThickness="0,0,1,1" BorderBrush="{x:Null}" Click="Button_Click" >
+            <Button.Effect>
+                <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
+            </Button.Effect>
+        </Button>
+    </Grid>
+
+</UserControl>
