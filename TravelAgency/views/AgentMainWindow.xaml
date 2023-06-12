@@ -17,13 +17,11 @@
             <Image Height="31px" Width="63" Source="/travel.png" Opacity="0.85" RenderTransformOrigin="-0.412,0.692"/>
             <Button Tag="Home" Content="Početna" Margin="5" Click="Button_Click" FontFamily="Fonts/#Poppins" FontSize="14px" FontWeight="Light" Foreground="#EAEAEA" Background="#00DDDDDD" BorderThickness="0,0,0,0" />
             <Button Tag="CreateNew" Content="Novo putovanje" Margin="5" Click="Button_Click" FontFamily="Fonts/#Poppins" FontSize="14px" FontWeight="Light" Foreground="#EAEAEA" Background="#00DDDDDD" BorderThickness="0,0,0,0" />
-            <Button Tag="SoldTrips" Content="Prodata putovanja" Margin="5" Click="Button_Click" FontFamily="Fonts/#Poppins" FontSize="14px" FontWeight="Light" Foreground="#EAEAEA" Background="#00DDDDDD" BorderThickness="0,0,0,0" />
+            <Button Tag="TripsByMonth" Content="Ture za mesec" Margin="5" Click="Button_Click" FontFamily="Fonts/#Poppins" FontSize="14px" FontWeight="Light" Foreground="#EAEAEA" Background="#00DDDDDD" BorderThickness="0,0,0,0" />
+            <Button Tag="SoldTripsNumber" Content="Izveštaj tura" Margin="5" Click="Button_Click" FontFamily="Fonts/#Poppins" FontSize="14px" FontWeight="Light" Foreground="#EAEAEA" Background="#00DDDDDD" BorderThickness="0,0,0,0" />
             <Button Tag="" Content="Odjavi se" Margin="270,0,0,0" FontFamily="Fonts/#Poppins" FontSize="14px" FontWeight="Light" Foreground="#EAEAEA" Background="#00DDDDDD" BorderThickness="0,0,0,0"  Click="LogOut"/>
         </StackPanel>
-
-        <Grid Grid.Row="1" Background="White">
-            <!-- Add your page content here -->
-        </Grid>
+        <ContentControl Grid.Row="1" x:Name="contentControl" />
     </Grid>
 </Window>
 
