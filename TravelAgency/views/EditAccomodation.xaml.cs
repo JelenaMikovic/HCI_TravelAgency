@@ -100,5 +100,39 @@ namespace TravelAgency.views
             AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
             clientMainWindow.contentControl.Content = tourDetails;
         }
+
+        private void Save(object sender, RoutedEventArgs e)
+        {
+            if (Application.Current.Resources["DbContext"] is DbContext dbContext)
+            {
+                Accomondation attraction = dbContext.Accomondations.Find(restaurantId);
+           
+                Location location = dbContext.Locations.Find(attraction.Location.Id);
+                Location newLocation = new Location
+                {
+                    Id = location.Id,
+                    Address = adrestxt.Text,
+                    City = location.City,
+                    Country = location.Country
+                };
+                dbContext.Locations.Remove(location);
+                dbContext.Locations.Add(newLocation);
+                Accomondation updated = new Accomondation
+                {
+                    Id = attraction.Id,
+                    TourID = attraction.TourID,
+                    Name = nametxt.Text,
+                    Type = (AccomondationType)Enum.Parse(typeof(AccomondationType), ((ComboBoxItem)myComboBox.SelectedItem).Tag.ToString()),
+                    Picture = "",
+                    Location = newLocation
+                };
+                dbContext.Accomondations.Remove(attraction);
+                dbContext.Accomondations.Add(updated);
+            }
+            else
+            {
+                MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
