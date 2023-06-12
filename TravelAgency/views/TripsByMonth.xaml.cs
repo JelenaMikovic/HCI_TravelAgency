@@ -30,10 +30,10 @@ namespace TravelAgency.views
         {
             InitializeComponent();
             DataContext = this;
-            Trips = this.GetTrips();
+            Trips = null;
         }
 
-        private ObservableCollection<Trip>? GetTrips()
+        private ObservableCollection<Trip> GetTrips(int month, int year)
         {
             var converter = new Base64StringToImageSourceConverter();
             Trips = new ObservableCollection<Trip>();
@@ -41,14 +41,16 @@ namespace TravelAgency.views
             {
                 foreach (Tour tour in dbContext.Tours)
                 {
-                    Trips.Add(new Trip
-                    {
-                        Location = tour.Name,
-                        DateRange = tour.From.ToString("d") + " - " + tour.To.ToString("d") + " (" + (int)(tour.To - tour.From).TotalDays + " dana)",
-                        Price = tour.Price,
-                        Id = tour.Id,
-                        Image = (BitmapImage)converter.Convert(tour.Picture, null, null, null)
-                    });
+                    if(tour.From.Month == month && tour.From.Year == year) {
+                        Trips.Add(new Trip
+                        {
+                            Location = tour.Name,
+                            DateRange = tour.From.ToString("d") + " - " + tour.To.ToString("d") + " (" + (int)(tour.To - tour.From).TotalDays + " dana)",
+                            Price = tour.Price,
+                            Id = tour.Id,
+                            Image = (BitmapImage)converter.Convert(tour.Picture, null, null, null)
+                        });
+                    }
                 }
             }
             else
@@ -72,9 +74,12 @@ namespace TravelAgency.views
             }
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            DateTime selectedDate = datePicker.SelectedDate ?? DateTime.MinValue;
+            int month = selectedDate.Month;
+            int year = selectedDate.Year;
+            Trips = GetTrips(month, year);
         }
     }
 }

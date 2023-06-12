@@ -15,7 +15,6 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" >
             <Label Content="Putovanja za odabrani mesec" FontSize="22" FontWeight="Medium" FontFamily="Poppins" Foreground="#FF0C0C0C" Margin="44,4,0,0"/>
-            <ComboBox Width="217" Height="27" Margin="61,10,10,10" SelectionChanged="ComboBox_SelectionChanged" Text="Odaberite mesec"/>
         </StackPanel>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Foreground="#FFEAEAEA">
             <ListBox x:Name="tripListBox" ItemsSource="{Binding Trips}" Foreground="#FFEAEAEA" Background="#FFEAEAEA" SelectionChanged="TripListBox_SelectionChanged">
@@ -62,5 +61,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </ScrollViewer>
+        <DatePicker Name="datePicker" SelectedDateChanged="DatePicker_SelectedDateChanged" HorizontalAlignment="Left" Margin="465,6,0,0" VerticalAlignment="Top" Width="185"/>
     </Grid>
 </UserControl>
