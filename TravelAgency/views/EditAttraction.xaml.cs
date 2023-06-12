@@ -102,39 +102,44 @@ namespace TravelAgency.views
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            if (Application.Current.Resources["DbContext"] is DbContext dbContext)
-            {
-                Attraction attraction = dbContext.Attractions.Find(restaurantId);
+            MessageBoxResult result = MessageBox.Show("Molimo Vas da potvrdite promene.", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                Location location = dbContext.Locations.Find(attraction.Location.Id);
-                Location newLocation = new Location
-                {
-                    Id = location.Id,
-                    Address = adrestxt.Text,
-                    City = location.City,
-                    Country = location.Country
-                };
-                dbContext.Locations.Remove(location);
-                dbContext.Locations.Add(newLocation);
-                var converter = new Base64StringToImageSourceConverter();
-                Attraction updated = new Attraction
-                {
-                    Id = attraction.Id,
-                    TourID = attraction.TourID,
-                    Name = nametxt.Text,
-                    Description = desctxt.Text,
-                    Picture = (string)converter.ConvertBack(DraggedImage.Source, null, null, null),
-                    Location = newLocation
-                };
-                dbContext.Attractions.Remove(attraction);
-                dbContext.Attractions.Add(updated);
-                EditAttractionMain tourDetails = new EditAttractionMain(selectedTripId, restaurantId);
-                AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
-                clientMainWindow.contentControl.Content = tourDetails;
-            }
-            else
+            if (result == MessageBoxResult.Yes)
             {
-                MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (Application.Current.Resources["DbContext"] is DbContext dbContext)
+                {
+                    Attraction attraction = dbContext.Attractions.Find(restaurantId);
+
+                    Location location = dbContext.Locations.Find(attraction.Location.Id);
+                    Location newLocation = new Location
+                    {
+                        Id = location.Id,
+                        Address = adrestxt.Text,
+                        City = location.City,
+                        Country = location.Country
+                    };
+                    dbContext.Locations.Remove(location);
+                    dbContext.Locations.Add(newLocation);
+                    var converter = new Base64StringToImageSourceConverter();
+                    Attraction updated = new Attraction
+                    {
+                        Id = attraction.Id,
+                        TourID = attraction.TourID,
+                        Name = nametxt.Text,
+                        Description = desctxt.Text,
+                        Picture = (string)converter.ConvertBack(DraggedImage.Source, null, null, null),
+                        Location = newLocation
+                    };
+                    dbContext.Attractions.Remove(attraction);
+                    dbContext.Attractions.Add(updated);
+                    EditAttractionMain tourDetails = new EditAttractionMain(selectedTripId, restaurantId);
+                    AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+                    clientMainWindow.contentControl.Content = tourDetails;
+                }
+                else
+                {
+                    MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }

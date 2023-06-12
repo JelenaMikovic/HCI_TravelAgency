@@ -103,36 +103,41 @@ namespace TravelAgency.views
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            if (Application.Current.Resources["DbContext"] is DbContext dbContext)
+            MessageBoxResult result = MessageBox.Show("Molimo Vas da potvrdite promene.", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
             {
-                Accomondation attraction = dbContext.Accomondations.Find(restaurantId);
-           
-                Location location = dbContext.Locations.Find(attraction.Location.Id);
-                Location newLocation = new Location
+                if (Application.Current.Resources["DbContext"] is DbContext dbContext)
                 {
-                    Id = location.Id,
-                    Address = adrestxt.Text,
-                    City = location.City,
-                    Country = location.Country
-                };
-                dbContext.Locations.Remove(location);
-                dbContext.Locations.Add(newLocation);
-                var converter = new Base64StringToImageSourceConverter();
-                Accomondation updated = new Accomondation
+                    Accomondation attraction = dbContext.Accomondations.Find(restaurantId);
+
+                    Location location = dbContext.Locations.Find(attraction.Location.Id);
+                    Location newLocation = new Location
+                    {
+                        Id = location.Id,
+                        Address = adrestxt.Text,
+                        City = location.City,
+                        Country = location.Country
+                    };
+                    dbContext.Locations.Remove(location);
+                    dbContext.Locations.Add(newLocation);
+                    var converter = new Base64StringToImageSourceConverter();
+                    Accomondation updated = new Accomondation
+                    {
+                        Id = attraction.Id,
+                        TourID = attraction.TourID,
+                        Name = nametxt.Text,
+                        Type = (AccomondationType)Enum.Parse(typeof(AccomondationType), ((ComboBoxItem)myComboBox.SelectedItem).Tag.ToString()),
+                        Picture = (string)converter.ConvertBack(DraggedImage.Source, null, null, null),
+                        Location = newLocation
+                    };
+                    dbContext.Accomondations.Remove(attraction);
+                    dbContext.Accomondations.Add(updated);
+                }
+                else
                 {
-                    Id = attraction.Id,
-                    TourID = attraction.TourID,
-                    Name = nametxt.Text,
-                    Type = (AccomondationType)Enum.Parse(typeof(AccomondationType), ((ComboBoxItem)myComboBox.SelectedItem).Tag.ToString()),
-                    Picture = (string)converter.ConvertBack(DraggedImage.Source, null, null, null),
-                    Location = newLocation
-                };
-                dbContext.Accomondations.Remove(attraction);
-                dbContext.Accomondations.Add(updated);
-            }
-            else
-            {
-                MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }
