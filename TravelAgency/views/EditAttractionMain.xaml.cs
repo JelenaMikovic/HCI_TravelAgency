@@ -61,7 +61,9 @@ namespace TravelAgency.views
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-
+            EditAttraction tourDetails = new EditAttraction(selectedTripId,restaurantId);
+            AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+            clientMainWindow.contentControl.Content = tourDetails;
         }
 
         private void Delete(object sender, RoutedEventArgs e)
