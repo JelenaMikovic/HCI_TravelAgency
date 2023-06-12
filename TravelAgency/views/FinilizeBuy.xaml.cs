@@ -48,7 +48,7 @@ namespace TravelAgency.views
             }
         }
 
-        private void Reserve(object sender, RoutedEventArgs e)
+        private void Buy(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Molimo Vas da potvrdite kupovinu.", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question);
 

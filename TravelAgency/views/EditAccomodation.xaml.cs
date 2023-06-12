@@ -20,9 +20,14 @@ namespace TravelAgency.views
     /// </summary>
     public partial class EditAccomodation : UserControl
     {
-        public EditAccomodation()
+        private int selectedTripId;
+        private int restaurantId;
+
+        public EditAccomodation(int selectedTripId, int restaurantId)
         {
             InitializeComponent();
+            this.selectedTripId = selectedTripId;
+            this.restaurantId = restaurantId;
         }
 
         private void OnDrop(object sender, DragEventArgs e)
@@ -52,6 +57,13 @@ namespace TravelAgency.views
                 e.Effects = DragDropEffects.None;
             }
             e.Handled = true;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            EditAccomodationMain tourDetails = new EditAccomodationMain(selectedTripId,restaurantId);
+            AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+            clientMainWindow.contentControl.Content = tourDetails;
         }
     }
 }
