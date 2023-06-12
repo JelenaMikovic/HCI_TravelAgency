@@ -133,6 +133,9 @@ namespace TravelAgency.views
                     };
                     dbContext.Accomondations.Remove(attraction);
                     dbContext.Accomondations.Add(updated);
+                    EditAccomodation tourDetails = new EditAccomodation(selectedTripId, restaurantId);
+                    AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+                    clientMainWindow.contentControl.Content = tourDetails;
                 }
                 else
                 {
