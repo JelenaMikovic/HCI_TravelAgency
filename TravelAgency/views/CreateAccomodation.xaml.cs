@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelAgency.converters;
+using TravelAgency.db;
 using TravelAgency.model;
 
 namespace TravelAgency.views
@@ -64,6 +66,50 @@ namespace TravelAgency.views
             EditTourMain futureTrips = new EditTourMain(tourId);
             AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
             agentMainWindow.contentControl.Content = futureTrips;
+        }
+
+        private void Save(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Molimo Vas da potvrdite promene.", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                if (Application.Current.Resources["DbContext"] is DbContext dbContext)
+                {
+                    Tour attraction = dbContext.Tours.Find(tourId);
+
+                    //Location location = dbContext.Locations.Find(attraction.Location.Id);
+                    Location newLocation = new Location
+                    {
+                        Id = dbContext.Locations.Count() + 10,
+                        Address = adrestxt.Text,
+                        City = attraction.StartingLocation.City,
+                        Country = attraction.StartingLocation.Country
+                    };
+                    //dbContext.Locations.Remove(location);
+                    dbContext.Locations.Add(newLocation);
+                    var converter = new Base64StringToImageSourceConverter();
+                    Accomondation updated = new Accomondation
+                    {
+                        Id = dbContext.Accomondations.Count() + 10,
+                        TourID = attraction.Id,
+                        Name = nametxt.Text,
+                        Type = (AccomondationType)Enum.Parse(typeof(AccomondationType), ((ComboBoxItem)myComboBox.SelectedItem).Tag.ToString()),
+                        Picture = (string)converter.ConvertBack(DraggedImage.Source, null, null, null),
+                        Location = newLocation
+                    };
+                    //dbContext.Accomondations.Remove(attraction);
+                    dbContext.Accomondations.Add(updated);
+                    dbContext.SaveChanges();
+                    EditTourMain tourDetails = new EditTourMain(tourId);
+                    AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+                    clientMainWindow.contentControl.Content = tourDetails;
+                }
+                else
+                {
+                    MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

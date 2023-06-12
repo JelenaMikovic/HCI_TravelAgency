@@ -36,10 +36,10 @@
             <Image x:Name="DraggedImage" Visibility="Collapsed" Stretch="Uniform" />
             <!-- Add your desired controls for the right side here -->
         </StackPanel>
-        <TextBox HorizontalAlignment="Left" Margin="73,43,0,0" TextWrapping="Wrap" Text="Unesite naziv atrakcije" VerticalAlignment="Top" Width="239" Height="37" Background="#D9D9D9" FontSize="14" FontWeight="Light" BorderThickness="0"/>
-        <TextBox HorizontalAlignment="Left" Margin="73,88,0,0" TextWrapping="Wrap" Text="Unesite adresu atrakcije" VerticalAlignment="Top" Width="239" Height="37" Background="#D9D9D9" FontSize="14" FontWeight="Light" BorderThickness="0"/>
-        <TextBox HorizontalAlignment="Left" Margin="73,134,0,0" TextWrapping="Wrap" Text="Unesite opis atrakcije" VerticalAlignment="Top" Width="239" Height="179" Background="#D9D9D9" Foreground="Black" FontSize="14" FontWeight="Light" IsReadOnly="False"/>
-        <Button Content="Dodaj" HorizontalAlignment="Left" Margin="73,329,0,0" VerticalAlignment="Top" Width="239" Height="33" Background="Black" Foreground="White" BorderThickness="0"/>
+        <TextBox HorizontalAlignment="Left" Name="nametxt" Margin="73,43,0,0" TextWrapping="Wrap" Text="Unesite naziv atrakcije" VerticalAlignment="Top" Width="239" Height="37" Background="#D9D9D9" FontSize="14" FontWeight="Light" BorderThickness="0"/>
+        <TextBox HorizontalAlignment="Left" Name="adrestxt" Margin="73,88,0,0" TextWrapping="Wrap" Text="Unesite adresu atrakcije" VerticalAlignment="Top" Width="239" Height="37" Background="#D9D9D9" FontSize="14" FontWeight="Light" BorderThickness="0"/>
+        <TextBox HorizontalAlignment="Left" Name="desctxt" Margin="73,134,0,0" TextWrapping="Wrap" Text="Unesite opis atrakcije" VerticalAlignment="Top" Width="239" Height="179" Background="#D9D9D9" Foreground="Black" FontSize="14" FontWeight="Light" IsReadOnly="False"/>
+        <Button Content="Dodaj" Click="Save" HorizontalAlignment="Left" Margin="73,329,0,0" VerticalAlignment="Top" Width="239" Height="33" Background="Black" Foreground="White" BorderThickness="0"/>
         <Button Style="{StaticResource RoundButtonStyle}" Panel.ZIndex="9999" Content="&lt;Nazad" Click="Back" HorizontalAlignment="Left" Height="18" Margin="5,5,5,5" Grid.Row="2" VerticalAlignment="Top" Width="70" FontFamily="/Fonts/#Poppins" FontSize="12" Foreground="#FF0C0C0C" RenderTransformOrigin="1,0" Background="#FFEAEAEA" BorderThickness="0,0,1,1" BorderBrush="{x:Null}" >
             <Button.Effect>
                 <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
