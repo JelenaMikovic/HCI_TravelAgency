@@ -204,10 +204,12 @@ namespace TravelAgency.views
                     Location loc = dbContext.Locations.Find(t.StartingLocation.Id);
                     dbContext.Locations.Remove(loc);
                     dbContext.Tours.Remove(t);
+                    dbContext.SaveChanges();
                     AgentFutureTrips tourDetails = new AgentFutureTrips();
                     AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
                     clientMainWindow.contentControl.Content = tourDetails;
                 }
+
                 else
                 {
                     MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);

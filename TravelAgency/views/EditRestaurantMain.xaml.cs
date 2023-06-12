@@ -78,6 +78,7 @@ namespace TravelAgency.views
                     Location location = dbContext.Locations.Find(attraction.Location.Id);
                     dbContext.Locations.Remove(location);
                     dbContext.Restaurants.Remove(attraction);
+                    dbContext.SaveChanges();
                     EditTourMain tourDetails = new EditTourMain(selectedTripId);
                     AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
                     clientMainWindow.contentControl.Content = tourDetails;

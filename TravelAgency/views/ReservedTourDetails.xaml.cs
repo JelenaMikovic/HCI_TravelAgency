@@ -185,7 +185,7 @@ namespace TravelAgency.views
                     dbContext.BoughtTours.Add(new BoughtTour
                     {
                         Id = dbContext.BoughtTours.Count() + 100,
-                        TourId = detailedTrip.Id,
+                        TourId = dbContext.ReservedTours.Find(selectedTripId).TourId,
                         UserId = LoggedInUser.CurrentUser.Id,
                         Attractions = atr,
                         Restaurants = res,

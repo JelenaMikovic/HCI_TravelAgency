@@ -55,10 +55,31 @@ namespace TravelAgency.views
 
             if (result == MessageBoxResult.Yes)
             {
-
-                MessageBox.Show("Uspesno ste obavili rezervaciju!", "Obavljena rezervaija", MessageBoxButton.OK, MessageBoxImage.Information);
                 if (Application.Current.Resources["DbContext"] is DbContext dbContext)
                 {
+                    foreach(ReservedTour tour in dbContext.ReservedTours)
+                    {
+                        if(tour.TourId == detailedTrip.Id && LoggedInUser.CurrentUser.Id == tour.UserId)
+                        {
+                            MessageBox.Show("Vec ste rezervisali ovo putovanje!", "Neuspela rezervaija", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            ReservedTours reservationn = new ReservedTours();
+                            ClientMainWindow clientMainWindown = (ClientMainWindow)Application.Current.MainWindow;
+                            clientMainWindown.contentControl.Content = reservationn;
+                            return;
+                        }
+                    }
+                    foreach (BoughtTour tour in dbContext.BoughtTours)
+                    {
+                        if (tour.TourId == detailedTrip.Id && LoggedInUser.CurrentUser.Id == tour.UserId)
+                        {
+                            MessageBox.Show("Vec ste kupili ovo putovanje!", "Neuspela rezervaija", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            BoughtTours reservationn = new BoughtTours();
+                            ClientMainWindow clientMainWindown = (ClientMainWindow)Application.Current.MainWindow;
+                            clientMainWindown.contentControl.Content = reservationn;
+                            return;
+                        }
+                    }
+                    MessageBox.Show("Uspesno ste obavili rezervaciju!", "Obavljena rezervaija", MessageBoxButton.OK, MessageBoxImage.Information);
                     List<Attraction> atr = new List<Attraction>();
                     foreach (TripAttraction i in attractions)
                     {

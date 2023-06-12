@@ -219,5 +219,12 @@ namespace TravelAgency.views
             AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
             agentMainWindow.contentControl.Content = editRestaurant;
         }
+
+        private void EditInfo(object sender, RoutedEventArgs e)
+        {
+            EditTour editRestaurant = new EditTour(selectedTripId);
+            AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+            agentMainWindow.contentControl.Content = editRestaurant;
+        }
     }
 }

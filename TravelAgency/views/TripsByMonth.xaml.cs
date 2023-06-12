@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,10 +24,19 @@ namespace TravelAgency.views
     /// <summary>
     /// Interaction logic for TripsByMonth.xaml
     /// </summary>
-    public partial class TripsByMonth : UserControl
+    public partial class TripsByMonth : UserControl, INotifyPropertyChanged
     {
-        public ObservableCollection<Trip> Trips { get; set; }
-        private int SelectedTripId { get; set; }
+        private ObservableCollection<Trip> trips;
+        public ObservableCollection<Trip> Trips
+        {
+            get { return trips; }
+            set
+            {
+                trips = value;
+                OnPropertyChanged();
+            }
+        }
+
         public TripsByMonth()
         {
             InitializeComponent();
@@ -36,13 +47,14 @@ namespace TravelAgency.views
         private ObservableCollection<Trip> GetTrips(int month, int year)
         {
             var converter = new Base64StringToImageSourceConverter();
-            Trips = new ObservableCollection<Trip>();
+            ObservableCollection<Trip> trips = new ObservableCollection<Trip>();
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
                 foreach (Tour tour in dbContext.Tours)
                 {
-                    if(tour.From.Month == month && tour.From.Year == year) {
-                        Trips.Add(new Trip
+                    if (tour.From.Month == month && tour.From.Year == year)
+                    {
+                        trips.Add(new Trip
                         {
                             Location = tour.Name,
                             DateRange = tour.From.ToString("d") + " - " + tour.To.ToString("d") + " (" + (int)(tour.To - tour.From).TotalDays + " dana)",
@@ -57,18 +69,15 @@ namespace TravelAgency.views
             {
                 MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            return Trips;
+            return trips;
         }
-
-        
 
         private void TripListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (tripListBox.SelectedItem != null)
             {
                 var selectedTripId = ((Trip)tripListBox.SelectedItem).Id;
-                SelectedTripId = selectedTripId;
-                TourDetails tourDetails = new TourDetails(selectedTripId);
+                TourDetailsAgent tourDetails = new TourDetailsAgent(selectedTripId);
                 AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
                 agentMainWindow.contentControl.Content = tourDetails;
             }
@@ -79,7 +88,16 @@ namespace TravelAgency.views
             DateTime selectedDate = datePicker.SelectedDate ?? DateTime.MinValue;
             int month = selectedDate.Month;
             int year = selectedDate.Year;
+
             Trips = GetTrips(month, year);
+        }
+
+        // Implement INotifyPropertyChanged interface
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

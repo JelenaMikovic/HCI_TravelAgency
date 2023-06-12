@@ -48,7 +48,11 @@
                     </StackPanel>
 
                     <Label  Content="{Binding detailedTrip.Location}" FontSize="22" FontWeight="Medium" Foreground="#FF0C0C0C" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Column="1"/>
-                    <Label Content="Mapa" HorizontalAlignment="Right" Margin="0,0,0,10" Grid.Column="1"/>
+                    <Button Style="{StaticResource RoundButtonStyle}" Grid.Column="1" Content="Izmeni" Height="27" Width="56" FontFamily="/Fonts/#Poppins" FontSize="14" Foreground="#FF0C0C0C" RenderTransformOrigin="1,0" Background="Transparent" BorderThickness="1" BorderBrush="#FF0C0C0C" Click="EditInfo" Margin="649,6,8,0" VerticalAlignment="Top" >
+                        <Button.Effect>
+                            <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
+                        </Button.Effect>
+                    </Button>
                 </Grid>
                 <Label  Content="{Binding detailedTrip.DateRange}" FontSize="12" Foreground="#FF0C0C0C" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Column="1"/>
                 <Label Content="Turističke atrakcije" FontSize="16" FontWeight="Medium" Foreground="#FF0C0C0C"/>
@@ -178,6 +182,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
+                
             </StackPanel>
         </ScrollViewer>
     </Grid>
