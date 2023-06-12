@@ -117,13 +117,14 @@ namespace TravelAgency.views
                 };
                 dbContext.Locations.Remove(location);
                 dbContext.Locations.Add(newLocation);
+                var converter = new Base64StringToImageSourceConverter();
                 Accomondation updated = new Accomondation
                 {
                     Id = attraction.Id,
                     TourID = attraction.TourID,
                     Name = nametxt.Text,
                     Type = (AccomondationType)Enum.Parse(typeof(AccomondationType), ((ComboBoxItem)myComboBox.SelectedItem).Tag.ToString()),
-                    Picture = "",
+                    Picture = (string)converter.ConvertBack(DraggedImage.Source, null, null, null),
                     Location = newLocation
                 };
                 dbContext.Accomondations.Remove(attraction);

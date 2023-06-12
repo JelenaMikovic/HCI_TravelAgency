@@ -115,6 +115,7 @@ namespace TravelAgency.views
                     Country = location.Country
                 };
                 dbContext.Locations.Remove(location);
+                var converter = new Base64StringToImageSourceConverter();
                 dbContext.Locations.Add(newLocation);
                 Restaurant updated = new Restaurant
                 {
@@ -122,7 +123,7 @@ namespace TravelAgency.views
                     TourID = attraction.TourID,
                     Name = nametxt.Text,
                     Description = desctxt.Text,
-                    Picture = attraction.Picture,
+                    Picture = (string)converter.ConvertBack(DraggedImage.Source, null, null, null),
                     Location = newLocation
                 };
                 dbContext.Restaurants.Remove(attraction);

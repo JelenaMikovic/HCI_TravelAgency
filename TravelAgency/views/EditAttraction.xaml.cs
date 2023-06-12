@@ -116,13 +116,14 @@ namespace TravelAgency.views
                 };
                 dbContext.Locations.Remove(location);
                 dbContext.Locations.Add(newLocation);
+                var converter = new Base64StringToImageSourceConverter();
                 Attraction updated = new Attraction
                 {
                     Id = attraction.Id,
                     TourID = attraction.TourID,
                     Name = nametxt.Text,
                     Description = desctxt.Text,
-                    Picture = attraction.Picture,
+                    Picture = (string)converter.ConvertBack(DraggedImage.Source, null, null, null),
                     Location = newLocation
                 };
                 dbContext.Attractions.Remove(attraction);
