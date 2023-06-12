@@ -39,41 +39,54 @@ namespace TravelAgency.views
         }
         private void GiveUp(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da zelite da odustanete?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+            if (result == MessageBoxResult.Yes)
+            {
+                TourDetails tourDetails = new TourDetails(detailedTrip.Id);
+                ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                clientMainWindow.contentControl.Content = tourDetails;
+            }
         }
 
         private void Reserve(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Uspesno ste obavili rezervaciju!", "Obavljena rezervaija", MessageBoxButton.OK, MessageBoxImage.Information);
-            if (Application.Current.Resources["DbContext"] is DbContext dbContext)
-            {
-                List<Attraction> atr = new List<Attraction>();
-                foreach(TripAttraction i in attractions)
-                {
-                    atr.Add(dbContext.Attractions.Find(i.Id));
-                }
-                List<Restaurant> res = new List<Restaurant>();
-                foreach(TripRestaurant i in restaurants)
-                {
-                    res.Add(dbContext.Restaurants.Find(i.Id));
-                }
-                Accomondation acc = dbContext.Accomondations.Find(accomondations[0].Id);
-                dbContext.ReservedTours.Add(new ReservedTour
-                {
-                    Id = dbContext.ReservedTours.Count()+100,
-                    TourId = detailedTrip.Id,
-                    UserId = LoggedInUser.CurrentUser.Id,
-                    Attractions = atr,
-                    Restaurants = res,
-                    Accomondation = acc,
-                    isDeleted = false
-                });
+            MessageBoxResult result = MessageBox.Show("Molimo Vas da potvrdite rezervaciju.", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                dbContext.SaveChanges();
+            if (result == MessageBoxResult.Yes)
+            {
+
+                MessageBox.Show("Uspesno ste obavili rezervaciju!", "Obavljena rezervaija", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (Application.Current.Resources["DbContext"] is DbContext dbContext)
+                {
+                    List<Attraction> atr = new List<Attraction>();
+                    foreach (TripAttraction i in attractions)
+                    {
+                        atr.Add(dbContext.Attractions.Find(i.Id));
+                    }
+                    List<Restaurant> res = new List<Restaurant>();
+                    foreach (TripRestaurant i in restaurants)
+                    {
+                        res.Add(dbContext.Restaurants.Find(i.Id));
+                    }
+                    Accomondation acc = dbContext.Accomondations.Find(accomondations[0].Id);
+                    dbContext.ReservedTours.Add(new ReservedTour
+                    {
+                        Id = dbContext.ReservedTours.Count() + 100,
+                        TourId = detailedTrip.Id,
+                        UserId = LoggedInUser.CurrentUser.Id,
+                        Attractions = atr,
+                        Restaurants = res,
+                        Accomondation = acc,
+                        isDeleted = false
+                    });
+
+                    dbContext.SaveChanges();
+                }
+                ReservedTours reservation = new ReservedTours();
+                ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                clientMainWindow.contentControl.Content = reservation;
             }
-            ReservedTours reservation = new ReservedTours();
-            ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
-            clientMainWindow.contentControl.Content = reservation;
         }
     }
 }

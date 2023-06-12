@@ -164,14 +164,59 @@ namespace TravelAgency.views
 
         public void Buy(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Molimo Vas da potvrdite kupovinu.", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+            if (result == MessageBoxResult.Yes)
+            {
+                MessageBox.Show("Uspesno ste kupili putovanje!", "Obavljena kupovina", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (Application.Current.Resources["DbContext"] is DbContext dbContext)
+                {
+                    List<Attraction> atr = new List<Attraction>();
+                    foreach (TripAttraction i in attractions)
+                    {
+                        atr.Add(dbContext.Attractions.Find(i.Id));
+                    }
+                    List<Restaurant> res = new List<Restaurant>();
+                    foreach (TripRestaurant i in restaurants)
+                    {
+                        res.Add(dbContext.Restaurants.Find(i.Id));
+                    }
+                    Accomondation acc = dbContext.Accomondations.Find(accomondations[0].Id);
+                    dbContext.BoughtTours.Add(new BoughtTour
+                    {
+                        Id = dbContext.BoughtTours.Count() + 100,
+                        TourId = detailedTrip.Id,
+                        UserId = LoggedInUser.CurrentUser.Id,
+                        Attractions = atr,
+                        Restaurants = res,
+                        Accomondation = acc,
+                        isDeleted = false
+                    });
+                    dbContext.ReservedTours.Remove(dbContext.ReservedTours.Find(selectedTripId));
+                    dbContext.SaveChanges();
+                }
+                BoughtTours reservation = new BoughtTours();
+                ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                clientMainWindow.contentControl.Content = reservation;
+            }
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            FutureTrips futureTrips = new FutureTrips();
-            ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
-            clientMainWindow.contentControl.Content = futureTrips;
+            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da zelite da otkazete?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                if (Application.Current.Resources["DbContext"] is DbContext dbContext)
+                {
+                    dbContext.ReservedTours.Remove(dbContext.ReservedTours.Find(selectedTripId));
+                    dbContext.SaveChanges();
+                }
+                MessageBox.Show("Uspesno ste otkazali rezervaciju", "Obavljeno otkazivanje", MessageBoxButton.OK, MessageBoxImage.Information);
+                FutureTrips futureTrips = new FutureTrips();
+                ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                clientMainWindow.contentControl.Content = futureTrips;
+            }
         }
 
         private void Back(object sender, RoutedEventArgs e)
