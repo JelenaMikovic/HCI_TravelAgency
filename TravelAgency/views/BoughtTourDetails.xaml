@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:maps="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              xmlns:local="clr-namespace:TravelAgency.views"
              mc:Ignorable="d" 
               d:DesignHeight="405" d:DesignWidth="750" Foreground="#FFEAEAEA" FontFamily="Fonts/#Poppins" >
@@ -48,8 +49,30 @@
                     </StackPanel>
 
                     <Label  Content="{Binding detailedTrip.Location}" FontSize="22" FontWeight="Medium" Foreground="#FF0C0C0C" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Column="1"/>
-                    <Label Content="Mapa" HorizontalAlignment="Right" Margin="0,0,0,10" Grid.Column="1"/>
+                    <StackPanel HorizontalAlignment="Right" Margin="0,0,0,10" Grid.Column="1" Orientation="Horizontal">
+                        <Label Content="Mapa"/>
+                        <Button Click="ShowMap" x:Name="mapButton"  BorderThickness="0,0,0,0" Width="18">
+                            <Image Source="../images/map.png" Height="18"/>
+                        </Button>
+                    </StackPanel>
+
                 </Grid>
+                <Popup x:Name="mapPopup" Placement="Center" PlacementTarget="{Binding ElementName=mapButton}" Loaded="Popup_Loaded">
+                    <Popup.RenderTransform>
+                        <TranslateTransform x:Name="popupTransform" />
+                    </Popup.RenderTransform>
+                    <Grid>
+                        <maps:Map Width="600" Height="400" x:Name="myMap" CredentialsProvider="yQPugx2BdP4Z4jFOgqA6~vbvF_IqjsRBEaAvEzIZjng~Aji6WgIN35bikdwGC0vNFmFXZNmHbM0kHk4SSM_l2xHldQ2cSukhAB-3oYQujGjS" />
+                        <Button Style="{StaticResource RoundButtonStyle}" Content="Zatvori" Click="CloseMap" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"  Height="40" Grid.Row="2"  Width="163" FontFamily="/Fonts/#Poppins" FontSize="14" Foreground="#FFEAEAEA" RenderTransformOrigin="1,0" Background="#FF0C0C0C" BorderThickness="0,0,1,1" BorderBrush="{x:Null}" >
+                            <Button.Effect>
+                                <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
+                            </Button.Effect>
+                        </Button>
+                    </Grid>
+                    <Popup.Effect>
+                        <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
+                    </Popup.Effect>
+                </Popup>
                 <Label  Content="{Binding detailedTrip.DateRange}" FontSize="12" Foreground="#FF0C0C0C" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Column="1"/>
                 <Label Content="Turističke atrakcije" HorizontalAlignment="Left" FontSize="14" FontWeight="Medium" Foreground="#FF0C0C0C"/>
                 <ListBox ItemsSource="{Binding attractions}" x:Name="attractionList" SelectionChanged="AttractionSelected" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="170" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">

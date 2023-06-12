@@ -81,7 +81,7 @@ namespace TravelAgency.db
                 new Location
                 {
                     Id = 1,
-                    Country = "Srbija",
+                    Country = "Serbia",
                     City = "Kragujevac",
                     Address = "Grada sirena 15"
                 });
@@ -90,53 +90,53 @@ namespace TravelAgency.db
                 new Location
                 {
                     Id = 2,
-                    Country = "Srbija",
-                    City = "Jagodina",
-                    Address = "Vuka Bojovića BB"
+                    Country = "Србија",
+                    City = "Јагодина",
+                    Address = "Ulica Brace Dirak"
                 });
 
             Locations.Add(
                 new Location
                 {
                     Id = 3,
-                    Country = "Srbija",
-                    City = "Jagodina",
-                    Address = "Vuka Bojovića 2"
+                    Country = "Србија",
+                    City = "Јагодина",
+                    Address = "Vuka Bojovica 2A"
                 });
 
             Locations.Add(
                 new Location
                 {
                     Id = 4,
-                    Country = "Srbija",
-                    City = "Jagodina",
-                    Address = "Tome Miloševića 2"
+                    Country = "Србија",
+                    City = "Јагодина",
+                    Address = "Tome Milosevica 2"
                 });
 
             Locations.Add(
                 new Location
                 {
                     Id = 5,
-                    Country = "Srbija",
-                    City = "Jagodina",
-                    Address = "Čočetova 3"
+                    Country = "Србија",
+                    City = "Јагодина",
+                    Address = "Cocetova 3m"
                 });
 
             Locations.Add(
                 new Location
                 {
                     Id = 6,
-                    Country = "Srbija",
-                    City = "Jagodina",
-                    Address = "Aračlijski potok bb"
+                    Country = "Србија",
+                    City = "Јагодина",
+                    Address = "Mije Seferovica 1"
                 });
 
             Locations.Add(
                 new Location
                 {
                     Id = 7,
-                    Country = "Srbija",
-                    City = "Jagodina",
+                    Country = "Србија",
+                    City = "Јагодина",
                     Address = "Stevana Ivanovića 3"
                 });
 
