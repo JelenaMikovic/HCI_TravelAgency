@@ -51,8 +51,12 @@
                     <Label Content="Mapa" HorizontalAlignment="Right" Margin="0,0,0,10" Grid.Column="1"/>
                 </Grid>
                 <Label  Content="{Binding detailedTrip.DateRange}" FontSize="12" Foreground="#FF0C0C0C" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Column="1"/>
-                <Label Content="Turističke atrakcije" HorizontalAlignment="Left" FontSize="14" FontWeight="Medium" Foreground="#FF0C0C0C" Grid.Column="0"/>
-                <Label Content="Dodaj turističku atrakciju" HorizontalAlignment="Right" FontSize="14" FontWeight="Medium" Foreground="#FF0C0C0C" Grid.Column="1"/>
+                <Label Content="Turističke atrakcije" FontSize="16" FontWeight="Medium" Foreground="#FF0C0C0C"/>
+                <Button Style="{StaticResource RoundButtonStyle}" Content="Dodaj novu atrakciju" Height="27" Width="166" FontFamily="/Fonts/#Poppins" FontSize="14" Foreground="#FF0C0C0C" RenderTransformOrigin="1,0" Background="Transparent" BorderThickness="1" BorderBrush="#FF0C0C0C" Margin="509,-28,0,0" Click="Button_Click" >
+                    <Button.Effect>
+                        <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
+                    </Button.Effect>
+                </Button>
                 <ListBox ItemsSource="{Binding attractions}" x:Name="attractionList" SelectionChanged="AttractionSelected" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="170" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -87,7 +91,12 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Label Content="Ponuđeni restorani" HorizontalAlignment="Left" FontSize="14" FontWeight="Medium" Foreground="#FF0C0C0C"/>
+                <Label Content="Ponuđeni restorani" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#FF0C0C0C"/>
+                <Button Style="{StaticResource RoundButtonStyle}" Content="Dodaj nov restoran" Height="27" Width="166" FontFamily="/Fonts/#Poppins" FontSize="14" Foreground="#FF0C0C0C" RenderTransformOrigin="1,0" Background="Transparent" BorderThickness="1" BorderBrush="#FF0C0C0C" Margin="509,-28,0,0" Click="Button_Click_1" >
+                    <Button.Effect>
+                        <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
+                    </Button.Effect>
+                </Button>
                 <ListBox ItemsSource="{Binding restaurants}" x:Name="restaurantList" SelectionChanged="RestaurantSelected" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="170" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -122,7 +131,12 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Label Content="Smeštaj" HorizontalAlignment="Left" FontSize="14" FontWeight="Medium" Foreground="#FF0C0C0C"/>
+                <Label Content="Smeštaj" HorizontalAlignment="Left" FontSize="16" FontWeight="Medium" Foreground="#FF0C0C0C"/>
+                <Button Style="{StaticResource RoundButtonStyle}" Content="Dodaj nov smeštaj" Height="27" Width="166" FontFamily="/Fonts/#Poppins" FontSize="14" Foreground="#FF0C0C0C" RenderTransformOrigin="1,0" Background="Transparent" BorderThickness="1" BorderBrush="#FF0C0C0C" Margin="509,-28,0,0" Click="Button_Click_2">
+                    <Button.Effect>
+                        <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
+                    </Button.Effect>
+                </Button>
                 <ListBox ItemsSource="{Binding accomondations}" x:Name="accomodationList" SelectionChanged="AccomodationSelected" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="170" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>

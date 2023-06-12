@@ -198,5 +198,26 @@ namespace TravelAgency.views
                 agentMainWindow.contentControl.Content = editRestaurant;
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CreateNewAttraction editRestaurant = new CreateNewAttraction(selectedTripId);
+            AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+            agentMainWindow.contentControl.Content = editRestaurant;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            CreateRestaurant editRestaurant = new CreateRestaurant(selectedTripId);
+            AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+            agentMainWindow.contentControl.Content = editRestaurant;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            CreateAccomodation editRestaurant = new CreateAccomodation(selectedTripId);
+            AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+            agentMainWindow.contentControl.Content = editRestaurant;
+        }
     }
 }

@@ -16,8 +16,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
 using TravelAgency.model;
+
 
 namespace TravelAgency.views
 {
@@ -26,9 +26,11 @@ namespace TravelAgency.views
     /// </summary>
     public partial class CreateNewAttraction : UserControl
     {
-        public CreateNewAttraction()
+        private int tourId;
+        public CreateNewAttraction(int selectedTour)
         {
             InitializeComponent();
+            tourId = selectedTour;
         }
 
         private void OnDrop(object sender, DragEventArgs e)
@@ -60,5 +62,11 @@ namespace TravelAgency.views
             e.Handled = true;
         }
 
+        private void Back(object sender, RoutedEventArgs e)
+        {
+            EditTourMain futureTrips = new EditTourMain(tourId);
+            AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+            agentMainWindow.contentControl.Content = futureTrips;
+        }
     }
 }
