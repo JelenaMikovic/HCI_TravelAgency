@@ -20,31 +20,48 @@ using TravelAgency.model;
 namespace TravelAgency.views
 {
     /// <summary>
-    /// Interaction logic for FutureTrips.xaml
+    /// Interaction logic for Arrangements.xaml
     /// </summary>
-    public partial class FutureTrips : UserControl
+    public partial class Arrangements : UserControl
     {
-        public ObservableCollection<Trip> Trips { get; set; }
-        public FutureTrips()
+        public ObservableCollection<TripArrangement> Trips { get; set; }
+
+        public Arrangements()
         {
             InitializeComponent();
-       
+
             DataContext = this;
 
             Trips = this.GetTrips();
         }
 
-        private ObservableCollection<Trip>? GetTrips()
+        private ObservableCollection<TripArrangement>? GetTrips()
         {
             var converter = new Base64StringToImageSourceConverter();
-            Trips = new ObservableCollection<Trip>();
+            Trips = new ObservableCollection<TripArrangement>();
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
                 foreach (Tour tour in dbContext.Tours)
                 {
-                    Trips.Add(new Trip { Location = tour.Name, DateRange = tour.From.ToString("d") + " - " + tour.To.ToString("d") + " (" + (int)(tour.To - tour.From).TotalDays + " dana)", Price = tour.Price,
+                    int Bought = 0;
+                    int Reserved = 0;
+                    foreach (BoughtTour bought in dbContext.BoughtTours)
+                    {
+                        if(bought.TourId == tour.Id) { Bought++; }
+                    }
+                    foreach (ReservedTour reserved in dbContext.ReservedTours)
+                    {
+                        if (reserved.TourId == tour.Id) { Reserved++; }
+                    }
+                    Trips.Add(new TripArrangement
+                    {
+                        Location = tour.Name,
+                        DateRange = tour.From.ToString("d") + " - " + tour.To.ToString("d") + " (" + (int)(tour.To - tour.From).TotalDays + " dana)",
+                        Price = tour.Price,
                         Id = tour.Id,
-                        Image = (BitmapImage)converter.Convert(tour.Picture, null, null, null)
+                        Image = (BitmapImage)converter.Convert(tour.Picture, null, null, null),
+                        Bought = Bought,
+                        Reserved = Reserved
                     });
                 }
             }
@@ -63,8 +80,8 @@ namespace TravelAgency.views
             {
                 var selectedTripId = ((Trip)tripListBox.SelectedItem).Id;
                 SelectedTripId = selectedTripId;
-                TourDetails tourDetails = new TourDetails(selectedTripId);
-                ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                TourDetailsAgent tourDetails = new TourDetailsAgent(selectedTripId);
+                AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
                 clientMainWindow.contentControl.Content = tourDetails;
             }
         }
@@ -72,12 +89,14 @@ namespace TravelAgency.views
 
     }
 
-    public class Trip
+    public class TripArrangement
     {
         public int Id { get; set; }
         public string Location { get; set; }
         public string DateRange { get; set; }
         public int Price { get; set; }
         public BitmapImage Image { get; set; }
+        public int Bought { get; set; }
+        public int Reserved { get; set; }
     }
 }

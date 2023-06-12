@@ -41,10 +41,13 @@ namespace TravelAgency
                     content = new AgentFutureTrips();
                     break;
                 case "CreateNew":
-                    content = new CreateNewTour();
+                    //content = new CreateNewTour();
                     break;
                 case "TripsByMonth":
                     content = new TripsByMonth();
+                    break;
+                case "Arrangements":
+                    content = new Arrangements();
                     break;
                     // Add more cases for additional buttons if needed
             }

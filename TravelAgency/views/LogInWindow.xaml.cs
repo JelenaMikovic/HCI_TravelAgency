@@ -43,7 +43,7 @@ namespace TravelAgency
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Please enter a valid email and password.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
-                ClientMainWindow mainWindow = new ClientMainWindow();
+                AgentMainWindow mainWindow = new AgentMainWindow();
                 Application.Current.MainWindow = mainWindow;
                 mainWindow.Show();
                 Close();
