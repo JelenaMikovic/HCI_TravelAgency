@@ -21,80 +21,80 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style TargetType="PasswordBox" x:Key="RoundPasswordStyle">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="PasswordBox">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+        <Style TargetType="PasswordBox" x:Key="RoundPasswordStyle" BasedOn="{StaticResource {x:Type PasswordBox}}">
+            <Setter Property="Background" Value="#FFD9D9D9"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#FFD9D9D9"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-        <Style TargetType="TextBox" x:Key="RoundTextStyle">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+
+        <Style TargetType="TextBox" x:Key="RoundTextStyle" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Background" Value="#FFD9D9D9"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#FFD9D9D9"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
-    <Grid Margin="0,0,0,-6">
+    <Grid Margin="0,0,0,0" Background="#EAEAEA">
         <Grid.RowDefinitions>
             <RowDefinition Height="43*"/>
             <RowDefinition Height="55*"/>
             <RowDefinition Height="316*"/>
         </Grid.RowDefinitions>
-        <Rectangle HorizontalAlignment="Left" Height="414" Fill="#EAEAEA" VerticalAlignment="Top" Width="498" Grid.RowSpan="3" Margin="252,0,0,0"/>
 
         <Rectangle HorizontalAlignment="Left" Height="414" Fill="#0C0C0C" VerticalAlignment="Top" Width="252" Grid.RowSpan="3"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="73,5,0,0" VerticalAlignment="Top" Width="100" Source="/travel.png" Opacity="0.85" Grid.Row="1" Grid.RowSpan="2"/>
         <TextBlock Margin="27,55,512,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="/Fonts/#Poppins" Foreground="#FFEAEAEA" FontSize="22" TextAlignment="Right" Grid.Row="2" ><Run Text="&quot;Neka avantura"/><LineBreak/><Run Text="započne - prijavite"/><LineBreak/><Run Text="se i istražite"/><LineBreak/><Run Text="svet s nama!&quot;"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="30,273,0,0" Grid.Row="2" FontFamily="/Fonts/#Poppins" FontWeight="Light" Foreground="#FFEAEAEA" FontSize="22" TextWrapping="Wrap" Text="Rapsody Travel ©" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="441,10,0,0" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="22" TextWrapping="Wrap" Text="Registracija" VerticalAlignment="Top"/>
-        <Button Style="{StaticResource RoundButtonStyle}" Content="Registrujte se" HorizontalAlignment="Left" Height="40" Margin="424,237,0,0" Grid.Row="2" VerticalAlignment="Top" Width="163" Click="Register" FontFamily="/Fonts/#Poppins" FontSize="14" Foreground="#FFEAEAEA" RenderTransformOrigin="1,0" Background="#FF0C0C0C" BorderThickness="0,0,1,1" BorderBrush="{x:Null}" >
+        <Button Style="{StaticResource RoundButtonStyle}" Content="Registrujte se" HorizontalAlignment="Left" Height="40" Margin="424,242,0,0" Grid.Row="2" VerticalAlignment="Top" Width="163" Click="Register" FontFamily="/Fonts/#Poppins" FontSize="14" Foreground="#FFEAEAEA" RenderTransformOrigin="1,0" Background="#FF0C0C0C" BorderThickness="0,0,1,1" BorderBrush="{x:Null}" >
             <Button.Effect>
                 <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
             </Button.Effect>
         </Button>
-        <TextBlock HorizontalAlignment="Left" Margin="320,97,0,0" Grid.Row="2" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" RenderTransformOrigin="0.509,0.55"/>
-        <TextBox Style="{StaticResource RoundTextStyle}" HorizontalAlignment="Left" Margin="318,123,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="362" Height="34" Background="#FFD9D9D9" BorderThickness="0,0,0,0" FontFamily="Poppins" RenderTransformOrigin="0.495,2.045">
+        <TextBlock HorizontalAlignment="Left" Margin="320,116,0,0" Grid.Row="2" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" RenderTransformOrigin="0.509,0.55"/>
+        <TextBox IsEnabled="True" Name="txtEmail" Style="{StaticResource RoundTextStyle}" HorizontalAlignment="Left" Margin="318,138,0,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="362" Height="34" Background="#FFD9D9D9" BorderThickness="0,0,0,0" FontFamily="Poppins" RenderTransformOrigin="0.495,2.045">
             <TextBox.Effect>
                 <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
             </TextBox.Effect>
         </TextBox>
-        <TextBlock HorizontalAlignment="Left" Margin="322,163,0,0" Grid.Row="2" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" TextWrapping="Wrap" Text="Šifra" VerticalAlignment="Top" RenderTransformOrigin="0.51,2.124"/>
-        <PasswordBox Style="{StaticResource RoundPasswordStyle}" HorizontalAlignment="Left" Margin="320,189,0,0" Grid.Row="2" VerticalAlignment="Top" Width="362" Height="33" Background="#FFD9D9D9" BorderThickness="0,0,0,0" FontFamily="Poppins">
+        <TextBlock HorizontalAlignment="Left" Margin="322,176,0,0" Grid.Row="2" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" TextWrapping="Wrap" Text="Šifra" VerticalAlignment="Top" RenderTransformOrigin="0.51,2.124"/>
+        <PasswordBox IsEnabled="True" Name="txtPassword" Style="{StaticResource RoundPasswordStyle}" HorizontalAlignment="Left" Margin="320,197,0,0" Grid.Row="2" VerticalAlignment="Top" Width="362" Height="33" Background="#FFD9D9D9" BorderThickness="0,0,0,0" FontFamily="Poppins">
             <PasswordBox.Effect>
                 <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
             </PasswordBox.Effect>
         </PasswordBox>
-        <Label Content="Imate nalog? Prijavite se!" HorizontalAlignment="Left" Margin="413,277,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" RenderTransformOrigin="0.495,1.342"/>
-        <TextBlock HorizontalAlignment="Left" Margin="320,33,0,0" Grid.Row="2" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" TextWrapping="Wrap" Text="Broj telefona" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
-        <TextBox Style="{StaticResource RoundTextStyle}" HorizontalAlignment="Left" Margin="318,59,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="362" Height="33" Background="#FFD9D9D9" BorderThickness="0,0,0,0" FontFamily="Poppins" RenderTransformOrigin="0.495,2.045">
+        <Button HorizontalAlignment="Left" Margin="419,280,0,0" Grid.Row="2" VerticalAlignment="Top" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" Background="Transparent" BorderThickness="0" Click="LogIn" >
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <ContentPresenter />
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Content>
+                <TextBlock Text="Imate nalog? Prijavite se!" />
+            </Button.Content>
+        </Button>
+        
+        <TextBlock HorizontalAlignment="Left" Margin="320,56,0,0" Grid.Row="2" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" TextWrapping="Wrap" Text="Broj telefona" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
+        <TextBox IsEnabled="True" Name="txtPhoneNumber" Style="{StaticResource RoundTextStyle}" HorizontalAlignment="Left" Margin="318,78,0,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="362" Height="33" Background="#FFD9D9D9" BorderThickness="0,0,0,0" FontFamily="Poppins" RenderTransformOrigin="0.495,2.045">
             <TextBox.Effect>
                 <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
             </TextBox.Effect>
         </TextBox>
-        <TextBlock HorizontalAlignment="Left" Margin="320,23,0,0" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" TextWrapping="Wrap" Text="Ime" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
-        <TextBox Style="{StaticResource RoundTextStyle}" HorizontalAlignment="Left" Margin="320,48,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150" Height="33" Background="#FFD9D9D9" BorderThickness="0,0,0,0" FontFamily="Poppins" RenderTransformOrigin="0.495,2.045" TextChanged="TextBox_TextChanged" Grid.RowSpan="2">
+        <TextBlock HorizontalAlignment="Left" Margin="318,38,0,0" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" TextWrapping="Wrap" Text="Ime" VerticalAlignment="Top" RenderTransformOrigin="0.546,-1.147" Grid.RowSpan="2"/>
+        <TextBox IsEnabled="True" Name="txtFirstName" Style="{StaticResource RoundTextStyle}" Foreground="#FF0C0C0C" HorizontalAlignment="Left" Margin="318,16,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="360" Height="33" Background="#FFD9D9D9" BorderThickness="0,0,0,0" FontFamily="Poppins" RenderTransformOrigin="0.495,2.045" >
             <TextBox.Effect>
                 <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
             </TextBox.Effect>
         </TextBox>
-        <TextBlock HorizontalAlignment="Left" Margin="505,23,0,0" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" TextWrapping="Wrap" Text="Prezime" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
-        <TextBox Style="{StaticResource RoundTextStyle}" HorizontalAlignment="Left" Margin="505,48,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150" Height="33" Background="#FFD9D9D9" BorderThickness="0,0,0,0" FontFamily="Poppins" RenderTransformOrigin="0.495,2.045" TextChanged="TextBox_TextChanged" Grid.RowSpan="2">
+        <TextBlock HorizontalAlignment="Left" Margin="322,53,0,0" FontFamily="/Fonts/#Poppins" Foreground="#FF0C0C0C" FontSize="14" TextWrapping="Wrap" Text="Prezime" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="2"/>
+        <TextBox IsEnabled="True" Name="txtLastName" Style="{StaticResource RoundTextStyle}" HorizontalAlignment="Left" Margin="318,19,0,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="360" Height="33" Background="#FFD9D9D9" BorderThickness="0,0,0,0" FontFamily="Poppins" RenderTransformOrigin="0.495,2.045">
             <TextBox.Effect>
                 <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
             </TextBox.Effect>

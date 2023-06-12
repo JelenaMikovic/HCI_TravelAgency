@@ -80,5 +80,6 @@ namespace TravelAgency
                 MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
     }
 }
