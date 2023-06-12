@@ -169,7 +169,7 @@
                             <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
                         </Button.Effect>
                     </Button>
-                    <Button Style="{StaticResource RoundButtonStyle}" Content="Obriši" Click="Reserve" HorizontalAlignment="Left" Height="40" Margin="5,0,0,0"  Grid.Row="2" VerticalAlignment="Top" Width="163" FontFamily="/Fonts/#Poppins" FontSize="14" Foreground="#FF0C0C0C" RenderTransformOrigin="1,0" Background="Transparent" BorderThickness="3" BorderBrush="#FF0C0C0C" >
+                    <Button Style="{StaticResource RoundButtonStyle}" Content="Obriši" Click="Delete" HorizontalAlignment="Left" Height="40" Margin="5,0,0,0"  Grid.Row="2" VerticalAlignment="Top" Width="163" FontFamily="/Fonts/#Poppins" FontSize="14" Foreground="#FF0C0C0C" RenderTransformOrigin="1,0" Background="Transparent" BorderThickness="3" BorderBrush="#FF0C0C0C" >
                         <Button.Effect>
                             <DropShadowEffect Color="#FF0C0C0C" Opacity="0.25" BlurRadius="7"/>
                         </Button.Effect>

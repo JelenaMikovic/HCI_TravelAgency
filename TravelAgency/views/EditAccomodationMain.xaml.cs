@@ -68,7 +68,26 @@ namespace TravelAgency.views
 
         private void Delete(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Molimo Vas da potvrdite brisanje.", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+            if (result == MessageBoxResult.Yes)
+            {
+                if (Application.Current.Resources["DbContext"] is DbContext dbContext)
+                {
+                    Accomondation attraction = dbContext.Accomondations.Find(restaurantId);
+                    Location location = dbContext.Locations.Find(attraction.Location.Id);
+                    dbContext.Locations.Remove(location);
+                    dbContext.Accomondations.Remove(attraction);
+                    EditTourMain tourDetails = new EditTourMain(selectedTripId);
+                    AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+                    clientMainWindow.contentControl.Content = tourDetails;
+                }
+                else
+                {
+                    MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

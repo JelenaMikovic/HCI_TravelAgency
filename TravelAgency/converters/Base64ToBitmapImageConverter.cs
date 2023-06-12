@@ -26,7 +26,20 @@ namespace TravelAgency.converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotSupportedException();
+            if (value is BitmapImage bitmapImage)
+            {
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    BitmapEncoder encoder = new JpegBitmapEncoder(); // Change the encoder type as per your requirement
+                    encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                    encoder.Save(memoryStream);
+
+                    byte[] imageBytes = memoryStream.ToArray();
+                    string base64String = System.Convert.ToBase64String(imageBytes);
+                    return base64String;
+                }
+            }
+            return null;
         }
     }
 }
