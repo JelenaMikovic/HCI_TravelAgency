@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelAgency.converters;
+using TravelAgency.db;
+using TravelAgency.model;
 
 namespace TravelAgency.views
 {
@@ -22,12 +25,44 @@ namespace TravelAgency.views
     {
         private int selectedTripId;
         private int restaurantId;
+        public TripAccomodation selectedAccomodation;
 
         public EditAccomodation(int selectedTripId, int restaurantId)
         {
             InitializeComponent();
             this.selectedTripId = selectedTripId;
             this.restaurantId = restaurantId;
+            selectedAccomodation = GetAccomondation();
+        }
+
+        private TripAccomodation GetAccomondation()
+        {
+            var converter = new Base64StringToImageSourceConverter();
+            TripAccomodation Attraction = new TripAccomodation();
+            if (Application.Current.Resources["DbContext"] is DbContext dbContext)
+            {
+                Accomondation attraction = dbContext.Accomondations.Find(restaurantId);
+                Attraction = new TripAccomodation
+                {
+                    Location = attraction.Location.Address,
+                    Id = attraction.Id,
+                    TourID = attraction.TourID,
+                    Type = attraction.Type.ToString(),
+                    Name = attraction.Name,
+                    Image = (BitmapImage)converter.Convert(attraction.Picture, null, null, null)
+                };
+                DraggedImage.Source = Attraction.Image;
+                DraggedImage.Visibility = Visibility.Visible;
+                adrestxt.Text = Attraction.Location;
+                nametxt.Text = Attraction.Name;
+                myComboBox.SelectedIndex = ((int)attraction.Type);
+            }
+            else
+            {
+                MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return Attraction;
         }
 
         private void OnDrop(object sender, DragEventArgs e)
