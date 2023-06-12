@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelAgency.model;
 
 namespace TravelAgency.views
 {
@@ -20,9 +21,11 @@ namespace TravelAgency.views
     /// </summary>
     public partial class CreateRestaurant : UserControl
     {
-        public CreateRestaurant()
+        private int tourId;
+        public CreateRestaurant(int selectedTour)
         {
             InitializeComponent();
+            tourId = selectedTour;
         }
 
         private void OnDrop(object sender, DragEventArgs e)
@@ -52,6 +55,13 @@ namespace TravelAgency.views
                 e.Effects = DragDropEffects.None;
             }
             e.Handled = true;
+        }
+
+        private void Back(object sender, RoutedEventArgs e)
+        {
+            EditTourMain futureTrips = new EditTourMain(tourId);
+            AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+            agentMainWindow.contentControl.Content = futureTrips;
         }
     }
 }

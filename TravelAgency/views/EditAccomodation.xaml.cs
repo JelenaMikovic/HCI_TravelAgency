@@ -123,11 +123,14 @@ namespace TravelAgency.views
                     TourID = attraction.TourID,
                     Name = nametxt.Text,
                     Type = (AccomondationType)Enum.Parse(typeof(AccomondationType), ((ComboBoxItem)myComboBox.SelectedItem).Tag.ToString()),
-                    Picture = "",
+                    Picture = attraction.Picture,
                     Location = newLocation
                 };
                 dbContext.Accomondations.Remove(attraction);
                 dbContext.Accomondations.Add(updated);
+                EditAccomodationMain tourDetails = new EditAccomodationMain(selectedTripId, restaurantId);
+                AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+                clientMainWindow.contentControl.Content = tourDetails;
             }
             else
             {
