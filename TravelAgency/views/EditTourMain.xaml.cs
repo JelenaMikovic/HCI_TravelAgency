@@ -20,9 +20,9 @@ using TravelAgency.model;
 namespace TravelAgency.views
 {
     /// <summary>
-    /// Interaction logic for TourDetailsAgent.xaml
+    /// Interaction logic for EditTourMain.xaml
     /// </summary>
-    public partial class TourDetailsAgent : UserControl
+    public partial class EditTourMain : UserControl
     {
         private int selectedTripId;
         private int attractionId;
@@ -31,7 +31,7 @@ namespace TravelAgency.views
         public ObservableCollection<TripAttraction> attractions { get; set; }
         public ObservableCollection<TripAccomodation> accomondations { get; set; }
         public ObservableCollection<TripRestaurant> restaurants { get; set; }
-        public TourDetailsAgent(int selectedTripId)
+        public EditTourMain(int selectedTripId)
         {
             this.selectedTripId = selectedTripId;
             InitializeComponent();
@@ -155,20 +155,6 @@ namespace TravelAgency.views
             return accomondations;
         }
 
-        public void Buy(object sender, RoutedEventArgs e)
-        {
-            BuyTrip futureTrips = new BuyTrip(selectedTripId);
-            ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
-            clientMainWindow.contentControl.Content = futureTrips;
-        }
-
-        public void Reserve(object sender, RoutedEventArgs e)
-        {
-            ReserveTrip futureTrips = new ReserveTrip(selectedTripId);
-            ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
-            clientMainWindow.contentControl.Content = futureTrips;
-
-        }
 
         private void Back(object sender, RoutedEventArgs e)
         {
@@ -183,7 +169,7 @@ namespace TravelAgency.views
             {
                 var attractionId = ((TripAttraction)attractionList.SelectedItem).Id;
                 this.attractionId = attractionId;
-                AtractionDetails atractionDetails = new AtractionDetails(selectedTripId, attractionId);
+                EditAttractionMain atractionDetails = new EditAttractionMain(selectedTripId, attractionId);
                 AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
                 agentMainWindow.contentControl.Content = atractionDetails;
             }
@@ -195,17 +181,22 @@ namespace TravelAgency.views
             {
                 var restaurantId = ((TripRestaurant)restaurantList.SelectedItem).Id;
                 this.restaurantId = restaurantId;
-                RestaurantDetails atractionDetails = new RestaurantDetails(selectedTripId, restaurantId);
+                EditRestaurantMain editRestaurant = new EditRestaurantMain(selectedTripId, restaurantId);
                 AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
-                agentMainWindow.contentControl.Content = atractionDetails;
+                agentMainWindow.contentControl.Content = editRestaurant;
             }
         }
 
-        private void Edit(object sender, RoutedEventArgs e)
+        private void AccomodationSelected(object sender, SelectionChangedEventArgs e)
         {
-            EditTourMain editTour = new EditTourMain(this.selectedTripId);
-            AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
-            agentMainWindow.contentControl.Content = editTour;
+            if (accomodationList.SelectedItem != null)
+            {
+                var restaurantId = ((TripAccomodation)accomodationList.SelectedItem).Id;
+                this.restaurantId = restaurantId;
+                EditAccomodationMain editRestaurant = new EditAccomodationMain(selectedTripId, restaurantId);
+                AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+                agentMainWindow.contentControl.Content = editRestaurant;
+            }
         }
     }
 }
