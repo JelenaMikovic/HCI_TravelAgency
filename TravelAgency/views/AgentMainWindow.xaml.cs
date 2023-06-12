@@ -55,7 +55,10 @@ namespace TravelAgency
 
         private void LogOut(object sender, RoutedEventArgs e)
         {
-
+            LogInWindow mainWindow = new LogInWindow();
+            Application.Current.MainWindow = mainWindow;
+            mainWindow.Show();
+            Close();
         }
     }
 }
