@@ -69,5 +69,11 @@ namespace TravelAgency.views
                 clientMainWindow.contentControl.Content = tourDetails;
             }
         }
+
+        private void ShowHelp_Click(object sender, RoutedEventArgs e)
+        {
+            Help display = new Help("/../../../help/AgentFutureTrips.html");
+            display.ShowDialog();
+        }
     }
 }

@@ -226,5 +226,11 @@ namespace TravelAgency.views
             AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
             agentMainWindow.contentControl.Content = editRestaurant;
         }
+
+        private void ShowHelp_Click(object sender, RoutedEventArgs e)
+        {
+            Help display = new Help("/../../../help/EditTouMain.html");
+            display.ShowDialog();
+        }
     }
 }

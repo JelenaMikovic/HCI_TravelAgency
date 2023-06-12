@@ -6,6 +6,22 @@
              xmlns:local="clr-namespace:TravelAgency.views"
              mc:Ignorable="d" 
              d:DesignHeight="405" d:DesignWidth="750" Foreground="#FFEAEAEA">
+    <UserControl.Resources>
+        <Style TargetType="Button" x:Key="helpme">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="50">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,7 +29,9 @@
         </Grid.RowDefinitions>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Foreground="#FFEAEAEA">
-            <ListBox x:Name="tripListBox" ItemsSource="{Binding Trips}" Foreground="#FFEAEAEA" Background="#FFEAEAEA" SelectionChanged="TripListBox_SelectionChanged">
+            <StackPanel>
+                <Button Style="{StaticResource helpme}" Click="ShowHelp_Click" Panel.ZIndex="99999999" Width="33" Height="33" BorderThickness="0" Margin="707,10,10,0" Content="?" FontFamily="Fonts/#Poppins" FontWeight="ExtraBold" FontSize="20"/>
+                <ListBox x:Name="tripListBox" ItemsSource="{Binding Trips}" Foreground="#FFEAEAEA" Background="#FFEAEAEA" SelectionChanged="TripListBox_SelectionChanged">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Tag" Value="{Binding Id}" />
@@ -56,6 +74,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </UserControl>

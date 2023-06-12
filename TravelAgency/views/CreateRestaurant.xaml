@@ -7,6 +7,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="405" d:DesignWidth="750" Foreground="#FFEAEAEA">
     <UserControl.Resources>
+        <Style TargetType="Button" x:Key="helpme">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="50">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="Button" x:Key="RoundButtonStyle">
             <Setter Property="Template">
                 <Setter.Value>
@@ -24,11 +38,12 @@
     </UserControl.Resources>
     <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <!-- Left side -->
+        <Button Style="{StaticResource helpme}" Click="ShowHelp_Click" Panel.ZIndex="99999999" Width="33" Height="33" BorderThickness="0" Margin="334,3,8,369" Content="?" FontFamily="Fonts/#Poppins" FontWeight="ExtraBold" FontSize="20"/>
 
         <!-- Right side -->
         <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AllowDrop="True" Drop="OnDrop" DragEnter="OnDragEnter" Background="#D9D9D9" Name="ImagePanel">

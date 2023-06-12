@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelAgency.db;
 using TravelAgency.model;
+using TravelAgency.views;
 
 namespace TravelAgency
 {
@@ -81,5 +82,14 @@ namespace TravelAgency
             }
         }
 
+
+
+        private void ShowHelp_Click(object sender, RoutedEventArgs e)
+        {
+            Help display = new Help("/../../../help/LogIn.html");
+            display.ShowDialog();
+        }
+
     }
+    
 }

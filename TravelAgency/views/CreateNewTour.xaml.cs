@@ -113,5 +113,11 @@ namespace TravelAgency.views
                 return;
             }
         }
+
+        private void ShowHelp_Click(object sender, RoutedEventArgs e)
+        {
+            Help display = new Help("/../../../help/CreateNewTour.html");
+            display.ShowDialog();
+        }
     }
 }

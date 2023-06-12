@@ -256,5 +256,11 @@ namespace TravelAgency.views
             AgentMainWindow agentMainWindow = (AgentMainWindow)Application.Current.MainWindow;
             agentMainWindow.contentControl.Content = editTour;
         }
+
+        private void ShowHelp_Click(object sender, RoutedEventArgs e)
+        {
+            Help display = new Help("/../../../help/EditTourMain.html");
+            display.ShowDialog();
+        }
     }
 }

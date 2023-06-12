@@ -271,5 +271,11 @@ namespace TravelAgency.views
                 }
             }
         }
+
+        private void ShowHelp_Click(object sender, RoutedEventArgs e)
+        {
+            Help display = new Help("/../../../help/ClientBoughtTourDetails.html");
+            display.ShowDialog();
+        }
     }
 }

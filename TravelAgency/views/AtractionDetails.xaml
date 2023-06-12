@@ -22,8 +22,23 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="Button" x:Key="helpme">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="50">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Grid>
+        <Button Style="{StaticResource helpme}" Click="ShowHelp_Click" Panel.ZIndex="99999999" Width="33" Height="33" BorderThickness="0" Margin="707,5,10,367" Content="?" FontFamily="Fonts/#Poppins" FontWeight="ExtraBold" FontSize="20"/>
         <Image Source="{Binding SelectedAttraction.Image}"  Stretch="UniformToFill" HorizontalAlignment="Left" VerticalAlignment="Top" Height="405" Margin="0,0,0,0" Width="375"/>
         <Label Content="{Binding SelectedAttraction.Name}" HorizontalAlignment="Left" Margin="382,68,0,0" VerticalAlignment="Top" FontFamily="Fonts/#Poppins" FontSize="22" FontWeight="Medium"/>
         <Label Content="{Binding SelectedAttraction.Location}" HorizontalAlignment="Left" Margin="382,96,0,0" VerticalAlignment="Top" FontFamily="Fonts/#Poppins" FontSize="10" FontWeight="Light"/>

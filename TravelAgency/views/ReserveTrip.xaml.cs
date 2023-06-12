@@ -219,5 +219,11 @@ namespace TravelAgency.views
             PreviousButton.Visibility = currentStep == 1 ? Visibility.Collapsed : Visibility.Visible;
             NextButton.Content = currentStep == 3 ? "Rezervisi" : "Dalje";
         }
+
+        private void ShowHelp_Click(object sender, RoutedEventArgs e)
+        {
+            Help display = new Help("/../../../help/ClientReserveTrour.html");
+            display.ShowDialog();
+        }
     }
 }

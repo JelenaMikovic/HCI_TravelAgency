@@ -7,6 +7,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="405" d:DesignWidth="750">
     <UserControl.Resources>
+        <Style TargetType="Button" x:Key="helpme">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="50">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="Button" x:Key="RoundButtonStyle">
             <Setter Property="Template">
                 <Setter.Value>
@@ -31,6 +45,7 @@
                     <ColumnDefinition Width="10"/>
                 </Grid.ColumnDefinitions>
 
+                <Button Style="{StaticResource helpme}" Click="ShowHelp_Click" Panel.ZIndex="99999999" Width="33" Height="33" BorderThickness="0" Margin="697,10,0,38" Content="?" FontFamily="Fonts/#Poppins" FontWeight="ExtraBold" FontSize="20" Grid.Column="1" HorizontalAlignment="Left"/>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10" Grid.Column="1">
                     <Label Content="Cena:" FontSize="16" FontWeight="Light" Foreground="#FF0C0C0C"/>
                     <Label Content="{Binding detailedTrip.Price}" FontSize="16" FontWeight="Medium" Foreground="#FF0C0C0C"/>

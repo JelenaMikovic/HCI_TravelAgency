@@ -40,6 +40,20 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
+        <Style TargetType="Button" x:Key="helpme">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="50">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid Margin="0,0,0,0" Background="#EAEAEA">
         <Grid.RowDefinitions>
@@ -47,6 +61,7 @@
             <RowDefinition Height="55*"/>
             <RowDefinition Height="316*"/>
         </Grid.RowDefinitions>
+        <Button Style="{StaticResource helpme}" Click="ShowHelp_Click" Panel.ZIndex="99999999" Width="33" Height="33" BorderThickness="0" Margin="707,10,10,0" Content="?" FontFamily="Fonts/#Poppins" FontWeight="ExtraBold" FontSize="20"/>
 
         <Rectangle HorizontalAlignment="Left" Height="414" Fill="#0C0C0C" VerticalAlignment="Top" Width="252" Grid.RowSpan="3"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="73,5,0,0" VerticalAlignment="Top" Width="100" Source="/travel.png" Opacity="0.85" Grid.Row="1" Grid.RowSpan="2"/>

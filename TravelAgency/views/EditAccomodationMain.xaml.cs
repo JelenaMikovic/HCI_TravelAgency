@@ -59,6 +59,12 @@ namespace TravelAgency.views
             return Restaurant;
         }
 
+        private void ShowHelp_Click(object sender, RoutedEventArgs e)
+        {
+            Help display = new Help("/../../../help/EditAccomondationMain.html");
+            display.ShowDialog();
+        }
+
         private void Edit(object sender, RoutedEventArgs e)
         {
             EditAccomodation tourDetails = new EditAccomodation(selectedTripId,restaurantId);

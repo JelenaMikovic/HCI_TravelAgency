@@ -95,5 +95,11 @@ namespace TravelAgency.views
                 MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void ShowHelp_Click(object sender, RoutedEventArgs e)
+        {
+            Help display = new Help("/../../../help/ClientAttractionRestaurantDetails.html");
+            display.ShowDialog();
+        }
     }
 }

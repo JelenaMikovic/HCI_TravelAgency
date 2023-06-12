@@ -137,6 +137,12 @@ namespace TravelAgency
             mainWindow.Show();
             Close();
         }
+
+        private void ShowHelp_Click(object sender, RoutedEventArgs e)
+        {
+            Help display = new Help("/../../../help/Register.html");
+            display.ShowDialog();
+        }
     }
 
     public class NotEmptyValidationRule : ValidationRule

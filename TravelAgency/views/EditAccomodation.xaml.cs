@@ -143,5 +143,11 @@ namespace TravelAgency.views
                 }
             }
         }
+
+        private void ShowHelp_Click(object sender, RoutedEventArgs e)
+        {
+            Help display = new Help("/../../../help/EditAccomondation.html");
+            display.ShowDialog();
+        }
     }
 }

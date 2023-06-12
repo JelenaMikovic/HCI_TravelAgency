@@ -21,6 +21,20 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="Button" x:Key="helpme">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="50">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="PasswordBox" x:Key="RoundPasswordStyle" BasedOn="{StaticResource {x:Type PasswordBox}}">
             <Setter Property="Background" Value="#FFD9D9D9"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -80,5 +94,6 @@
                 <TextBlock Text="Nemate nalog? Registrujte se!" />
             </Button.Content>
         </Button>
+        <Button Style="{StaticResource helpme}" Click="ShowHelp_Click" Panel.ZIndex="99999999" Width="33" Height="33" BorderThickness="0" Margin="707,10,10,0" Content="?" FontFamily="Fonts/#Poppins" FontWeight="ExtraBold" FontSize="20"/>
     </Grid>
 </Window>

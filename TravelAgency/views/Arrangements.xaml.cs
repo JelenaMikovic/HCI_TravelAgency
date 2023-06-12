@@ -76,14 +76,7 @@ namespace TravelAgency.views
 
         private void TripListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (tripListBox.SelectedItem != null)
-            {
-                var selectedTripId = ((Trip)tripListBox.SelectedItem).Id;
-                SelectedTripId = selectedTripId;
-                TourDetailsAgent tourDetails = new TourDetailsAgent(selectedTripId);
-                AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
-                clientMainWindow.contentControl.Content = tourDetails;
-            }
+           
         }
 
 
