@@ -155,18 +155,65 @@ namespace TravelAgency.views
             return accomondations;
         }
 
-        public void Buy(object sender, RoutedEventArgs e)
+        public void Delete(object sender, RoutedEventArgs e)
         {
-            BuyTrip futureTrips = new BuyTrip(selectedTripId);
-            ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
-            clientMainWindow.contentControl.Content = futureTrips;
-        }
+            MessageBoxResult result = MessageBox.Show("Molimo Vas da potvrdite brisanje.", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-        public void Reserve(object sender, RoutedEventArgs e)
-        {
-            ReserveTrip futureTrips = new ReserveTrip(selectedTripId);
-            ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
-            clientMainWindow.contentControl.Content = futureTrips;
+            if (result == MessageBoxResult.Yes)
+            {
+                if (Application.Current.Resources["DbContext"] is DbContext dbContext)
+                {
+                    foreach (TripRestaurant res in restaurants)
+                    {
+                        Restaurant attraction = dbContext.Restaurants.Find(res.Id);
+                        Location location = dbContext.Locations.Find(attraction.Location.Id);
+                        dbContext.Locations.Remove(location);
+                        dbContext.Restaurants.Remove(attraction);
+                    }
+                    foreach (TripAttraction res in attractions)
+                    {
+                        Attraction attraction = dbContext.Attractions.Find(res.Id);
+                        Location location = dbContext.Locations.Find(attraction.Location.Id);
+                        dbContext.Locations.Remove(location);
+                        dbContext.Attractions.Remove(attraction);
+                    }
+                    foreach (TripAccomodation res in accomondations)
+                    {
+                        Accomondation attraction = dbContext.Accomondations.Find(res.Id);
+                        Location location = dbContext.Locations.Find(attraction.Location.Id);
+                        dbContext.Locations.Remove(location);
+                        dbContext.Accomondations.Remove(attraction);
+                    }
+                    foreach (BoughtTour res in dbContext.BoughtTours)
+                    {
+                        if(res.TourId == selectedTripId)
+                        {
+                            dbContext.BoughtTours.Remove(res);
+                        }
+                     
+                    }
+                    foreach (ReservedTour res in dbContext.ReservedTours)
+                    {
+                        if (res.TourId == selectedTripId)
+                        {
+                            dbContext.ReservedTours.Remove(res);
+                        }
+
+                    }
+                    Tour t = dbContext.Tours.Find(selectedTripId);
+                    Location location = dbContext.Locations.Find(t.StartingLocation.Id);
+                    dbContext.Locations.Remove(location);
+                    dbContext.Tours.Remove(t);
+                    AgentFutureTrips tourDetails = new AgentFutureTrips();
+                    AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
+                    clientMainWindow.contentControl.Content = tourDetails;
+                }
+                else
+                {
+                    MessageBox.Show("Error occurred while accessing the database.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+            }
 
         }
 
