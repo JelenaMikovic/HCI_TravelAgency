@@ -64,21 +64,30 @@ namespace TravelAgency.views
         {
             if (Application.Current.Resources["DbContext"] is DbContext dbContext)
             {
-                if (dbContext.ReservedTours.Find(selectedTripId) != null)
+                if (LoggedInUser.CurrentUser.UserRole == UserRole.CLIENT)
                 {
-                    ReservedTourDetails tourDetails = new ReservedTourDetails(selectedTripId);
-                    ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
-                    clientMainWindow.contentControl.Content = tourDetails;
-                }
-                else if(dbContext.BoughtTours.Find(selectedTripId) != null)
-                {
-                    BoughtTourDetails tourDetails = new BoughtTourDetails(selectedTripId);
-                    ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
-                    clientMainWindow.contentControl.Content = tourDetails;
+                    if (dbContext.ReservedTours.Find(selectedTripId) != null)
+                    {
+                        ReservedTourDetails tourDetails = new ReservedTourDetails(selectedTripId);
+                        ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                        clientMainWindow.contentControl.Content = tourDetails;
+                    }
+                    else if (dbContext.BoughtTours.Find(selectedTripId) != null)
+                    {
+                        BoughtTourDetails tourDetails = new BoughtTourDetails(selectedTripId);
+                        ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                        clientMainWindow.contentControl.Content = tourDetails;
+                    }
+                    else
+                    {
+                        TourDetails tourDetails = new TourDetails(selectedTripId);
+                        ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                        clientMainWindow.contentControl.Content = tourDetails;
+                    }
                 } else
                 {
-                    TourDetails tourDetails = new TourDetails(selectedTripId);
-                    ClientMainWindow clientMainWindow = (ClientMainWindow)Application.Current.MainWindow;
+                    TourDetailsAgent tourDetails = new TourDetailsAgent(selectedTripId);
+                    AgentMainWindow clientMainWindow = (AgentMainWindow)Application.Current.MainWindow;
                     clientMainWindow.contentControl.Content = tourDetails;
                 }
             }
